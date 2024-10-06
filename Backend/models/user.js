@@ -1,26 +1,36 @@
 const mongoose = require("mongoose");
+require("dotenv").config(); 
 
-mongoose.connect("mongodb://127.0.0.1:27017/Mitrapay");
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("MongoDB connection error:", error);
+  });
+
 
 let userschma = mongoose.Schema({
     name: {
-        type:String,
-        required:true,
+        type: String,
+        required: true,
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        match: /.+\@.+\..+/ 
     },
-    phone_number:{
-        type:String,
-        required:true,
-        unique:true
+    phone_number: {
+        type: String,
+        required: true,
+        unique: true,
+        match: /^\d{10}$/ 
     },
-    password:{
-        type:String,
-        required:true,
+    password: {
+        type: String,
+        required: true,
     }
-})
+}, { timestamps: true });
 
-module.exports = mongoose.model("user",userschma);
+module.exports = mongoose.model("user", userschma);

@@ -1,4 +1,25 @@
 const userModel = require("../models/user");
+require('dotenv').config();
+console.log("CLIENT_ID:", process.env.CLIENT_ID);
+console.log("CLIENT_SECRET:", process.env.CLIENT_SECRET);
+console.log("REDIRECT_URI:", process.env.REDIRECT_URI);
+
+
+// const { OAuth2Client } = require('@googleapis/oauth2'); 
+
+
+const { OAuth2Client } = require('google-auth-library');
+
+const oauth2Client = new OAuth2Client(
+    process.env.CLIENT_ID,
+    process.env.CLIENT_SECRET,
+    process.env.REDIRECT_URI
+);
+
+
+
+
+
 const {
   generateAccessToken,
   generateRefreshToken,
@@ -92,5 +113,53 @@ const refreshToken = (req,res)=>{
   }
 }
 
+const googleLogin = async (req, res) => {
+  const { code } = req.body; // Get the authorization code from the request body
+  console.log(code);
+  try {
+    const { tokens } = await oauth2Client.getToken(code); // Exchange the authorization code for tokens
+    oauth2Client.setCredentials(tokens);
+    console.log(tokens);
+    
 
-module.exports = { register , login, logout, refreshToken};
+    // Get user info from Google
+    const userInfoResponse = await oauth2Client.request({
+      url: 'https://www.googleapis.com/oauth2/v3/userinfo',
+    });
+
+    const { name, email} = userInfoResponse.data; // Extract user info
+
+    // Check if user already exists in the database
+    let user = await userModel.findOne({ email });
+
+    if (!user) {
+      // If user does not exist, create a new user with a random password
+      const randomPassword = Math.random().toString(36).slice(-8); // Generate a random password
+      const hashedPassword = await hashPassword(randomPassword); // Hash the password
+
+      user = await userModel.create({
+        name,
+        email,
+        phone_number: null, // If you have a field for phone_number, you might want to handle it.
+        password: hashedPassword,
+      });
+    }
+
+    // Generate tokens for the user
+    const accessToken = generateAccessToken({ email });
+    const refreshToken = generateRefreshToken({ email });
+
+    // Set refresh token in a cookie
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+    });
+
+    res.json({ accessToken, user });
+  } catch (error) {
+    console.error('Google login error:', error);
+    res.status(500).send('Internal server error');
+  }
+};
+
+module.exports = { register , login, logout, refreshToken, googleLogin};
