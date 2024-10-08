@@ -9,7 +9,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 function App() {
   return (
     <StrictMode>
-      <GoogleOAuthProvider clientId="664804788453-jpo2th37sgtcovqbupt2iracvugbe0dp.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
         <Router>
           <Routes>
             <Route path="/" element={<Navigate to="/login" />} />

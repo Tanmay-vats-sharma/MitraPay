@@ -1,24 +1,11 @@
 const userModel = require("../models/user");
-require('dotenv').config();
-console.log("CLIENT_ID:", process.env.CLIENT_ID);
-console.log("CLIENT_SECRET:", process.env.CLIENT_SECRET);
-console.log("REDIRECT_URI:", process.env.REDIRECT_URI);
+const {google} = require('googleapis');
 
-
-// const { OAuth2Client } = require('@googleapis/oauth2'); 
-
-
-const { OAuth2Client } = require('google-auth-library');
-
-const oauth2Client = new OAuth2Client(
-    process.env.CLIENT_ID,
-    process.env.CLIENT_SECRET,
-    process.env.REDIRECT_URI
+const oauth2Client = new google.auth.OAuth2(
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  'postmessage'
 );
-
-
-
-
 
 const {
   generateAccessToken,
@@ -28,7 +15,7 @@ const {hashPassword,comparePassword} = require("../utils/password-encoder");
 
 const register = async (req, res) => {
   try {
-    let { name, email, phone_number, password } = req.body;
+    let { name, email, password } = req.body;
 
     let user = await userModel.findOne({ email: email });
     console.log("checkpoint-1", user);
@@ -41,7 +28,6 @@ const register = async (req, res) => {
       const newUser = await userModel.create({
         name,
         email,
-        phone_number,
         password: hashedPassword,
       });
       console.log("checkpoint-3", newUser);
@@ -115,12 +101,10 @@ const refreshToken = (req,res)=>{
 
 const googleLogin = async (req, res) => {
   const { code } = req.body; // Get the authorization code from the request body
-  console.log(code);
+
   try {
     const { tokens } = await oauth2Client.getToken(code); // Exchange the authorization code for tokens
     oauth2Client.setCredentials(tokens);
-    console.log(tokens);
-    
 
     // Get user info from Google
     const userInfoResponse = await oauth2Client.request({
@@ -140,11 +124,9 @@ const googleLogin = async (req, res) => {
       user = await userModel.create({
         name,
         email,
-        phone_number: null, // If you have a field for phone_number, you might want to handle it.
         password: hashedPassword,
       });
     }
-
     // Generate tokens for the user
     const accessToken = generateAccessToken({ email });
     const refreshToken = generateRefreshToken({ email });

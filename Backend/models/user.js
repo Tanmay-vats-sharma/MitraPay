@@ -21,12 +21,6 @@ let userschma = mongoose.Schema({
         unique: true,
         match: /.+\@.+\..+/ 
     },
-    phone_number: {
-        type: String,
-        required: true,
-        unique: true,
-        match: /^\d{10}$/ 
-    },
     password: {
         type: String,
         required: true,
