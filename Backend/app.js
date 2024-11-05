@@ -23,7 +23,15 @@ app.use(cors(corsOptions));
 app.use(cookieparser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+const requestLogger = (req, res, next) => {
+    console.log(`Request Method: ${req.method}`);
+    console.log(`Request Route: ${req.originalUrl}`);
+    console.log(`Request Body: ${JSON.stringify(req.body)}`);
+    next();
+};
+  
+// Use the request logger middleware
+app.use(requestLogger);
 
 const loginRoute = require("./routes/LoginRoute");
 
@@ -31,9 +39,6 @@ app.use("/api/auth", loginRoute);
 app.get("/" , (req,res)=>{
     res.send(`server is running on ${PORT}`)
 })
-
-
-
 
 
 app.listen(process.env.PORT, ()=>{

@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import RegisterFormStep1 from "./RegisterFormStep1";
 import RegisterFormStep2 from "./RegisterFormStep2";
+import { register } from "../../../Api/AuthService";
 function RegisterForm() {
+    const navigate = useNavigate();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         name: "",
@@ -24,14 +27,20 @@ function RegisterForm() {
             return newStep;
         });
     }
+
+    const handleSubmit = async () => {
+        try {
+            const response = await register(formData);
+            console.log("Response:",response);
+            navigate("/dashboard");
+        } catch (error) {
+            console.error("Error while registering:",error);
+        }
+    }
     return (
         <>
-            {formData.name}
-            {formData.email}
-            {formData.password}
-            {formData.phoneNumber}
             {step == 1 && <RegisterFormStep1 setFormData={setFormData} data={formData}/>}
-            {step == 2 && <RegisterFormStep2 setFormData={setFormData}/>}
+            {step == 2 && <RegisterFormStep2 setFormData={setFormData} data={formData}/>}
         
             <div className="mt-8 flex space-x-2">
                 {step > 1 && (
@@ -40,7 +49,7 @@ function RegisterForm() {
                 {step < 2 ? (
                     <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" onClick={()=>handleStepChange(1)}>Next</button>
                 ):(
-                    <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Submit</button>
+                    <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" onClick={() => handleSubmit()}>Submit</button>
                 )}
             </div>
         </>

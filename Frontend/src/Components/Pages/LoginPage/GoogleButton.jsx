@@ -1,6 +1,10 @@
 import { useGoogleLogin } from '@react-oauth/google';
+import { googleAuth } from '../../../Api/AuthService';
+import { useNavigate } from 'react-router-dom';
 
 function GoogleButton() {
+  const navigate = useNavigate()
+
   const googlelogin = useGoogleLogin({
     onSuccess: (authResult) => {
       console.log('Login Success:', authResult);
@@ -17,16 +21,10 @@ function GoogleButton() {
     try {
       if (authResult['code']) {
         // Send authorization code to the backend
-        const response = await fetch('http://127.0.0.1:8080/api/auth/google', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ code: authResult['code'] }),
-        });
-  
-        const data = await response.json();
-        console.log('Backend Response:', data);
+        const response = await googleAuth(authResult['code']);
+        
+        console.log('Backend Response:', response);
+        navigate('/dashboard');
       }
     } catch (error) {
       console.error('Error while requesting Google code:', error);
