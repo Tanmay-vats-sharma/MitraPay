@@ -1,5 +1,7 @@
 const userModel = require("../models/user");
-const {google} = require('googleapis');
+const { google } = require('googleapis');
+const mongoose = require("mongoose");
+const ApiError = require("../utils/ApiError");
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
@@ -11,26 +13,23 @@ const {
   generateAccessToken,
   generateRefreshToken,
 } = require("../utils/generateToken");
-const {hashPassword,comparePassword} = require("../utils/password-encoder");
+const { hashPassword, comparePassword } = require("../utils/password-encoder");
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   try {
     let { name, email, password } = req.body;
 
     let user = await userModel.findOne({ email: email });
-    console.log("checkpoint-1", user);
 
     if (user) {
-      res.send("email already used");
+      return next(new ApiError(400, "User already exists"));
     } else {
       const hashedPassword = await hashPassword(password);
-      console.log("checkpoint-2", hashedPassword);
       const newUser = await userModel.create({
         name,
         email,
         password: hashedPassword,
       });
-      console.log("checkpoint-3", newUser);
 
       const accessToken = generateAccessToken({ email });
       const refreshToken = generateRefreshToken({ email });
@@ -43,19 +42,22 @@ const register = async (req, res) => {
       res.json({ accessToken });
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal server error");
+    if (error instanceof mongoose.Error.ValidationError) {
+      return next(new ApiError(400, "Please Enter Correct Email", error.message));
+    }
+    next(error);
   }
 };
 
-const login = async (req,res)=>{
+const login = async (req, res, next) => {
   let { email, password } = req.body;
-  let user = await userModel.findOne({ email: email });
+  try {
+    let user = await userModel.findOne({ email: email });
 
-  if (user) {
-     const result = await comparePassword(password,user.password);
-     
-      if (result==true) {
+    if (user) {
+      const result = await comparePassword(password, user.password);
+
+      if (result == true) {
         const accessToken = generateAccessToken({ email });
         const refreshToken = generateRefreshToken({ email });
 
@@ -66,40 +68,43 @@ const login = async (req,res)=>{
         });
 
         res.json(accessToken);
-        
+
       } else {
-         res.status(400).json({'message: ':"Wrong password"});
+        next(new ApiError(400, "Please Enter Correct Password"));
       }
-    ;
-  } else {
-    res.status(500).send("something went wrong");
+      ;
+    } else {
+      next(new ApiError(404, "Please Enter Correct Email"));
+    }
+  } catch (error) {
+    next(error);
   }
 }
 
-const logout = (req,res) => {
+const logout = (req, res) => {
   res.cookie("token", "");
-  res.status().json({"message:": "user logged out"});
+  res.status().json({ "message:": "user logged out" });
 }
 
 
-const refreshToken = (req,res)=>{
-  try{
+const refreshToken = (req, res,next) => {
+  try {
     const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) return res.sendStatus(401);
-  
+
     jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, user) => {
-      if (err) return res.sendStatus(403);
-  
+      if (err) return next(new ApiError(403, "Invalid token"));
+
       const accessToken = generateAccessToken({ email: user.email });
       res.json({ accessToken });
     });
   }
-  catch(error){
-    res.status().json({"message:": "Something went wrong"});
+  catch (error) {
+    next(error);
   }
 }
 
-const googleLogin = async (req, res) => {
+const googleLogin = async (req, res,next) => {
   const { code } = req.body; // Get the authorization code from the request body
 
   try {
@@ -111,7 +116,7 @@ const googleLogin = async (req, res) => {
       url: 'https://www.googleapis.com/oauth2/v3/userinfo',
     });
 
-    const { name, email} = userInfoResponse.data; // Extract user info
+    const { name, email } = userInfoResponse.data; // Extract user info
 
     // Check if user already exists in the database
     let user = await userModel.findOne({ email });
@@ -139,9 +144,8 @@ const googleLogin = async (req, res) => {
 
     res.json({ accessToken, user });
   } catch (error) {
-    console.error('Google login error:', error);
-    res.status(500).send('Internal server error');
+    next(error);
   }
 };
 
-module.exports = { register , login, logout, refreshToken, googleLogin};
+module.exports = { register, login, logout, refreshToken, googleLogin };
