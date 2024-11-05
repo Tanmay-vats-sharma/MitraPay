@@ -1,4 +1,12 @@
 const userModel = require("../models/user");
+const {google} = require('googleapis');
+
+const oauth2Client = new google.auth.OAuth2(
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  'postmessage'
+);
+
 const {
   generateAccessToken,
   generateRefreshToken,
@@ -7,7 +15,7 @@ const {hashPassword,comparePassword} = require("../utils/password-encoder");
 
 const register = async (req, res) => {
   try {
-    let { name, email, phone_number, password } = req.body;
+    let { name, email, password } = req.body;
 
     let user = await userModel.findOne({ email: email });
     console.log("checkpoint-1", user);
@@ -20,7 +28,6 @@ const register = async (req, res) => {
       const newUser = await userModel.create({
         name,
         email,
-        phone_number,
         password: hashedPassword,
       });
       console.log("checkpoint-3", newUser);
@@ -42,12 +49,12 @@ const register = async (req, res) => {
 };
 
 const login = async (req,res)=>{
-        let { email, password } = req.body;
+  let { email, password } = req.body;
   let user = await userModel.findOne({ email: email });
 
   if (user) {
      const result = await comparePassword(password,user.password);
-     console.log(result);
+     
       if (result==true) {
         const accessToken = generateAccessToken({ email });
         const refreshToken = generateRefreshToken({ email });
@@ -92,5 +99,49 @@ const refreshToken = (req,res)=>{
   }
 }
 
+const googleLogin = async (req, res) => {
+  const { code } = req.body; // Get the authorization code from the request body
 
-module.exports = { register , login, logout, refreshToken};
+  try {
+    const { tokens } = await oauth2Client.getToken(code); // Exchange the authorization code for tokens
+    oauth2Client.setCredentials(tokens);
+
+    // Get user info from Google
+    const userInfoResponse = await oauth2Client.request({
+      url: 'https://www.googleapis.com/oauth2/v3/userinfo',
+    });
+
+    const { name, email} = userInfoResponse.data; // Extract user info
+
+    // Check if user already exists in the database
+    let user = await userModel.findOne({ email });
+
+    if (!user) {
+      // If user does not exist, create a new user with a random password
+      const randomPassword = Math.random().toString(36).slice(-8); // Generate a random password
+      const hashedPassword = await hashPassword(randomPassword); // Hash the password
+
+      user = await userModel.create({
+        name,
+        email,
+        password: hashedPassword,
+      });
+    }
+    // Generate tokens for the user
+    const accessToken = generateAccessToken({ email });
+    const refreshToken = generateRefreshToken({ email });
+
+    // Set refresh token in a cookie
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+    });
+
+    res.json({ accessToken, user });
+  } catch (error) {
+    console.error('Google login error:', error);
+    res.status(500).send('Internal server error');
+  }
+};
+
+module.exports = { register , login, logout, refreshToken, googleLogin};

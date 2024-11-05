@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Logo from "./assets/Logo3.png"
-import LoginForm from "./Components/Pages/LoginPage/LoginForm";
-import RegisterForm from "./Components/Pages/LoginPage/RegisterForm";
-import GoogleButton from "./Components/Pages/LoginPage/GoogleButton";
+import Logo from "../assets/Logo3.png"
+import LoginForm from "../Components/Pages/LoginPage/LoginForm";
+import RegisterForm from "../Components/Pages/LoginPage/RegisterForm";
+import GoogleButton from "../Components/Pages/LoginPage/GoogleButton";
 function Login() {
     const [Form, setForm] = useState("login");
 
