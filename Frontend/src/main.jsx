@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './login.jsx';
+import Login from './Pages/login.jsx';
 import './index.css';
 import Dashboard from './Dashboard.jsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';

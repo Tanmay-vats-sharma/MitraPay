@@ -23,7 +23,7 @@ function GoogleButton() {
         // Send authorization code to the backend
         const response = await googleAuth(authResult['code']);
         
-        console.log('Backend Response:', response);
+        console.log("Google Login Successfull");
         navigate('/dashboard');
       }
     } catch (error) {

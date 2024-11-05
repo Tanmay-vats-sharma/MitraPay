@@ -54,7 +54,7 @@ const login = async (req,res)=>{
 
   if (user) {
      const result = await comparePassword(password,user.password);
-     console.log(result);
+     
       if (result==true) {
         const accessToken = generateAccessToken({ email });
         const refreshToken = generateRefreshToken({ email });

@@ -13,10 +13,11 @@ function RegisterForm() {
         password: ""
     });
 
-    useEffect(() =>{
-        console.log("Step",step);
-        console.log("Form Data:",formData)
-    },[step,formData]);
+    // Testing the form data
+    // useEffect(() =>{
+    //     console.log("Step",step);
+    //     console.log("Form Data:",formData)
+    // },[step,formData]);
 
     const handleStepChange = (value) =>{
         setStep((prev) => {

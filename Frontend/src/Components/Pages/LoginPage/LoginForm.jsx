@@ -9,9 +9,10 @@ function LoginForm() {
         password: ""
     });
 
-    useEffect(() =>{
-        console.log("Form Data:",formData)
-    },[formData]);
+    // Testing the form data
+    // useEffect(() =>{
+    //     console.log("Form Data:",formData)
+    // },[formData]);
 
     const handleForm = (key,value) => {
         setFormData((prev) => ({
