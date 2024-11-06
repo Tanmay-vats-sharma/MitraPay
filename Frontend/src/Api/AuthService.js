@@ -5,12 +5,12 @@ export const login = async ({email, password}) => {
   try {
     const response = await api.post('/auth/login', { email, password });
     const { accessToken } = response.data;
-
+    console.log("Hit 1")
     // Store access token
     localStorage.setItem('accessToken', accessToken);
     return response.data;
   } catch (error) {
-    throw new Error(error.response?.data?.message || 'Login failed');
+    throw new Error(error.response?.data?.error?.message || 'Login failed');
   }
 };
 
@@ -20,7 +20,7 @@ export const register = async (userData) => {
     const response = await api.post('/auth/register', userData);
     return response.data;
   } catch (error) {
-    throw new Error(error.response?.data?.message || 'Registration failed');
+    throw new Error(error.response?.data?.error?.message || 'Registration failed');
   }
 };
 
@@ -45,6 +45,6 @@ export const googleAuth = async (code) => {
         localStorage.setItem('accessToken', accessToken);
         return response.data;
     } catch (error) {
-        throw new Error(error.response?.data?.message || 'Google authentication failed');
+        throw new Error(error.response?.data?.error?.message || 'Google authentication failed');
     }
 };

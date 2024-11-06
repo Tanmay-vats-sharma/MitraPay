@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import RegisterFormStep1 from "./RegisterFormStep1";
 import RegisterFormStep2 from "./RegisterFormStep2";
 import { register } from "../../../Api/AuthService";
+
 function RegisterForm() {
     const navigate = useNavigate();
     const [step, setStep] = useState(1);
@@ -32,10 +34,11 @@ function RegisterForm() {
     const handleSubmit = async () => {
         try {
             const response = await register(formData);
-            console.log("Response:",response);
+            toast.success("Registered successfully");
             navigate("/dashboard");
         } catch (error) {
             console.error("Error while registering:",error);
+            toast.error(error.message);
         }
     }
     return (

@@ -4,11 +4,14 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './Pages/login.jsx';
 import './index.css';
 import Dashboard from './Dashboard.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
   return (
     <StrictMode>
+      <ToastContainer />
       <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
         <Router>
           <Routes>
