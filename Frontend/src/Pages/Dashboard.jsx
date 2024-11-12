@@ -1,5 +1,7 @@
 import React from 'react'
 import { Navbar1, Navbar2, Navbar3 } from '../Components/Common/Navbar'
+import Logo from "../Assets/Logo2.png";
+import { Header } from '../Components/Common/header';
 
 function Dashboard() {
   return (
@@ -52,44 +54,10 @@ function Dashboard() {
     },
     {
       /* <div className="border-l pl-3 ml-3 space-x-1">
-                <button className="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full">
-                  <span className="sr-only">Notifications</span>
-                  <span className="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full"></span>
-                  <span className="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full animate-ping"></span>
-                  <svg
-                    aria-hidden="true"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="h-6 w-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                    />
-                  </svg>
-                </button>
+               
               </div>
               <div>
-                <button className="inline-flex px-5 py-3 ml-3 text-white bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 rounded-md ">
-                  <svg
-                    aria-hidden="true"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    />
-                  </svg>
-                  Manage Transactions
-                </button>
+                
               </div>
             </div> */
     },
@@ -162,13 +130,19 @@ function Dashboard() {
     },
     (
       <>
-        <div className="grid grid-cols-10 grid-rows-8 gap-4   p-3 min-h-screen \
-        ">
-          <div className="border-2 border-red-500 col-span-8 row-span-1  ">1</div>
+        <div
+          className="grid grid-cols-10 grid-rows-8 gap-3   p-2 min-h-screen \">
+          <div className=" col-span-8 row-span-1 flex items-center justify-between  ">
+            <Header></Header>
+          </div>
           <div className="border-2 border-red-500 col-span-2 row-span-8">2</div>
-          <div className="border-2 border-red-500 col-span-2  row-span-7">3</div>
+          <div className="border-2 border-red-500 col-span-2  row-span-7">
+            3
+          </div>
           <div className="border-2 border-red-500 col-span-6 row-span-3 "></div>
-          <div className="border-2 border-red-500  col-span-6 row-span-4">4</div>
+          <div className="border-2 border-red-500  col-span-6 row-span-4">
+            4
+          </div>
         </div>
       </>
     )
