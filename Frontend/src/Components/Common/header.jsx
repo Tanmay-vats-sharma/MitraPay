@@ -4,15 +4,15 @@ import Logo from "../../Assets/Logo2.png";
 export function Header() {
   return (
     <>
-      <div class="flex items-center justify-center  h-[100%] w-[24%]">
-        <img src={Logo} alt="Logo" class="h-12 w-25%" />
+      <div class="flex items-center justify-start  h-[100%] w-[24%]">
+        <img src={Logo} alt="Logo" class="h-12 w-20%" />
         <h1 class="text-3xl font-bold tracking-wide text-[#FDF209]">
           MitraPay
         </h1>
       </div>
 
-      <div className="h-[100%] w-[74%] flex justify-evenly items-center">
-        <div className=" w-[65%] h-[100%] flex flex-col justify-center items-start ">
+      <div className="h-[100%] w-[75%] flex justify-evenly items-center">
+        <div className=" w-[65%] h-[85%] flex flex-col justify-center items-start  rounded-md">
           <div className="text-black h-[40%] text-[21px] font-bold   ml-2">
             <h1>Hello! Tanmay Sharma</h1>
           </div>
