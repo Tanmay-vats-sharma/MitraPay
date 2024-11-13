@@ -4,9 +4,9 @@ import Logo from "../../Assets/Logo2.png";
 export function Header() {
   return (
     <>
-      <div class="flex items-center justify-start  h-[100%] w-[24%]">
+      <div className="flex items-center justify-start  h-[100%] w-[24%]">
         <img src={Logo} alt="Logo" class="h-12 w-20%" />
-        <h1 class="text-3xl font-bold tracking-wide text-[#FDF209]">
+        <h1 className="text-3xl font-bold tracking-wide text-[#FDF209]">
           MitraPay
         </h1>
       </div>

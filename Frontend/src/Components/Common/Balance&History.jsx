@@ -19,7 +19,7 @@ export function Balance() {
         </div>
         <div className="w-[100%] h-[45%]">
           <div className="h-[100%] w-full flex flex-col items-center justify-evenly p-1  ">
-            <div className="h-[70%] w-[30%] overflow-hidden rounded-full border-2 border-blue-100">
+            <div className="h-[70%] w-[30%] overflow-hidden rounded-full border-2 ">
               <img src={Profile_pic} alt="" />
             </div>
             <div className="text-xl tracking-tighter font-semibold ">
@@ -39,7 +39,91 @@ export function Balance() {
           </div>
         </div>
       </div>
-      <div className="h-[57%] border-2"></div>
+      <div className="h-[57%]  flex items-center flex-col ">
+        <div className="h-[15%] w-[100%] flex justify-envenly items-center  p-1">
+          <div className="font-semibold tracking-tighter text-[18px] w-[75%] h-[100%] flex items-center">
+            <p>Recent Transactions</p>
+          </div>
+          <div className="font-semibold tracking-tighter text-sm w-[25%] h-[100%] flex items-center justify-end p-1 text-blue-700">
+            <p>View All</p>
+          </div>
+        </div>
+        <hr className="w-[95%] border-t-1 border-gray-400 items-center mb-2" />
+        <div className=" w-[95%] h-[83%] flex flex-col justify-evenly">
+          <div className="flex justify-evenly  h-[18%] w-[100%] hover:bg-blue-100 border-l-4 border-transparent hover:border-indigo-500">
+            <div className="w-[20%] h-[100%]   ">
+              <div className="h-[100%] w-[100%] overflow-hidden rounded-md  p-1">
+                <img src={Profile_pic} alt="" />
+              </div>
+            </div>
+            <div className="w-[60%] h-[100%]  flex flex-col justify-center items-center p-1">
+              <div className="w-[90%]  h-[47%] text-[12px] font-semibold">
+                <p>Tanmay Sharma</p>
+              </div>
+              <div className=" w-[90%]  h-[47%] text-[10px] text-gray-400 font-semibold">
+                <p>10 May 2022, 9:05 pm</p>
+              </div>
+            </div>
+            <div className="w-[25%] h-[100%]  flex flex-col justify-center items-center text-[15px] text-blue-700">
+              <p>View</p>
+            </div>
+          </div>
+          <div className="flex justify-evenly  h-[18%] w-[100%] hover:bg-blue-100 border-l-4 border-transparent hover:border-indigo-500">
+            <div className="w-[20%] h-[100%]   ">
+              <div className="h-[100%] w-[100%] overflow-hidden rounded-md   p-1">
+                <img src={Profile_pic} alt="" />
+              </div>
+            </div>
+            <div className="w-[60%] h-[100%]  flex flex-col justify-center items-center p-1">
+              <div className="w-[90%]  h-[47%] text-[12px] font-semibold">
+                <p>Tanmay Sharma</p>
+              </div>
+              <div className=" w-[90%]  h-[47%] text-[10px] text-gray-400 font-semibold">
+                <p>10 May 2022, 9:05 pm</p>
+              </div>
+            </div>
+            <div className="w-[25%] h-[100%]  flex flex-col justify-center items-center text-[15px] text-blue-700">
+              <p>View</p>
+            </div>
+          </div>
+          <div className="flex justify-evenly h-[18%] w-[100%] hover:bg-blue-100 border-l-4 border-transparent hover:border-indigo-500">
+            <div className="w-[20%] h-[100%]   ">
+              <div className="h-[100%] w-[100%] overflow-hidden rounded-md p-1 ">
+                <img src={Profile_pic} alt="" />
+              </div>
+            </div>
+            <div className="w-[60%] h-[100%]  flex flex-col justify-center items-center p-1">
+              <div className="w-[90%]  h-[47%] text-[12px] font-semibold">
+                <p>Tanmay Sharma</p>
+              </div>
+              <div className=" w-[90%]  h-[47%] text-[10px] text-gray-400 font-semibold">
+                <p>10 May 2022, 9:05 pm</p>
+              </div>
+            </div>
+            <div className="w-[25%] h-[100%]  flex flex-col justify-center items-center text-[15px] text-blue-700">
+              <p>View</p>
+            </div>
+          </div>
+          <div className="flex justify-evenly h-[18%] w-[100%] hover:bg-blue-100 border-l-4 border-transparent hover:border-indigo-500">
+            <div className="w-[20%] h-[100%]   ">
+              <div className="h-[100%] w-[100%] overflow-hidden rounded-md  p-1">
+                <img src={Profile_pic} alt="" />
+              </div>
+            </div>
+            <div className="w-[60%] h-[100%]  flex flex-col justify-center items-center p-1">
+              <div className="w-[90%]  h-[47%] text-[12px] font-semibold">
+                <p>Tanmay Sharma</p>
+              </div>
+              <div className=" w-[90%]  h-[47%] text-[10px] text-gray-400 font-semibold">
+                <p>10 May 2022, 9:05 pm</p>
+              </div>
+            </div>
+            <div className="w-[25%] h-[100%]  flex flex-col justify-center items-center text-[15px] text-blue-700">
+              <p>View</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
