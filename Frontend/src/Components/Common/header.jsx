@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "../../Assets/Logo2.png";
+import Icon from "./Icon";
 
 export function Header() {
 
@@ -34,25 +35,10 @@ export function Header() {
           </div>
         </div>
         <div className=" h-[100%] flex items-center justify-center">
-          <button className="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full">
-            <span className="sr-only">Notifications</span>
-            <span className="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full"></span>
-            <span className="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full animate-ping"></span>
-            <svg
-              aria-hidden="true"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />
-            </svg>
-          </button>
+          <Icon
+            path="M31.25 35.4167h10.4165l-2.9279-2.9279A4.2447 4.2447 0 0137.5 29.1208V22.9167a12.5042 12.5042 0 00-8.3333-11.7864V10.4167a4.1667 4.1667 0 10-8.3333 0v1.736C15.9708 12.9271 12.5 17.475 12.5 22.9167v6.5802c0 1.1229-.4486 2.2042-1.2396 2.9863L8.3333 35.4167h10.4165m12.5 0v2.0833a6.25 6.25 0 11-12.5 0v-2.0833m12.5 0H18.75"
+            message="Notification"
+            pingEffect={true} />
         </div>
         <div className="w-[30%] h-[100%]  flex flex-col justify-center items-center">
           <button className="inline-flex px-5 py-3  text-white bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 rounded-md ">
