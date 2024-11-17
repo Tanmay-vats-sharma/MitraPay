@@ -1,9 +1,9 @@
-import React from 'react'
-import { Navbar } from '../Components/Common/Navbar'
-import { Header } from '../Components/Common/header';
-import { Balance } from '../Components/Common/Balance&History';
-import  Add_money  from "../Assets/Add_money.png";
-
+import React from "react";
+import { Navbar } from "../Components/Common/Navbar";
+import { Header } from "../Components/Common/header";
+import { Balance } from "../Components/Common/Balance&Contacts";
+import { Gullak } from "../Components/Common/Gullak";
+import { Transactions } from "../Components/Common/Transactions";
 function Dashboard() {
   return (
     <>
@@ -28,22 +28,18 @@ function Dashboard() {
               </a>
             </div>
           </div>
-          <div className="w-[98%] h-[80%] border-2 flex justify-around p-1">
-            <div className="h-[100%] w-[32%] border-2 bg-slate-100">
-              <div className="h-[100%] w-full flex flex-col items-center  p-1  ">
-            <div className="h-[70%] w-[30%] overflow-hidden rounded-full border-2 ">
-              <img src={Add_money} alt="" />
-            </div>
-          </div>
-            </div>
-            <div className="h-[100%] w-[32%] border-2"></div>
-            <div className="h-[100%] w-[32%] border-2"></div>
+          <div className="w-[98%] h-[80%]  flex justify-around p-3">
+            <Gullak></Gullak>
+            <Gullak></Gullak>
+            <Gullak></Gullak>
           </div>
         </div>
-        <div className="bg-white shadow-lg  border-[1px]  rounded-lg  col-span-6 row-span-4"></div>
+        <div className="bg-white shadow-lg  border-[1px]  rounded-lg  col-span-6 row-span-4">
+          <Transactions></Transactions>
+        </div>
       </div>
     </>
   );
 }
 
-export default Dashboard
+export default Dashboard;
