@@ -2,6 +2,19 @@ import React from "react";
 import Logo from "../../Assets/Logo2.png";
 
 export function Header() {
+
+  const getGreeting = () => {
+    const currentHour = new Date().getHours();
+    console.log(currentHour);
+    if (currentHour < 12 && currentHour >= 6) {
+      return 'Good Morning';
+    } else if (currentHour < 18 && currentHour >= 12) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  };
+
   return (
     <>
       <div className="flex items-center justify-start  h-[100%] w-[24%]">
@@ -17,7 +30,7 @@ export function Header() {
             <h1>Hello! Tanmay Sharma</h1>
           </div>
           <div className="h-[40%] text-gray-600 ml-2">
-            <p>Good Morning</p>
+            <p>{getGreeting()}</p>
           </div>
         </div>
         <div className=" h-[100%] flex items-center justify-center">
