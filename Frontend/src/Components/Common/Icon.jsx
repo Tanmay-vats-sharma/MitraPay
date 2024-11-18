@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Icon({ path, message, pingEffect = false}) {
     return (
-        <button className="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full group">
+        <button className="relative p-2 text-gray-800 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full group">
             {pingEffect && (
                 <>
                     <span className="absolute top-0 right-0 h-2 w-2 mt-1 mr-2 bg-red-500 rounded-full"></span>
@@ -23,7 +23,7 @@ export default function Icon({ path, message, pingEffect = false}) {
                     d={path}
                 />
             </svg>
-            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2">
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-600 text-white text-xs rounded py-1 px-2">
                 {message}
             </div>
         </button>

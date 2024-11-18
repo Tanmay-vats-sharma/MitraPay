@@ -19,7 +19,7 @@ function Dashboard() {
         </div>
         <div className="bg-white  rounded-lg flex flex-col justify-evenly shadow-lg items-center col-span-6 row-span-3 ">
           <div className="w-[100%] h-[20%]  flex justify-between  items-center p-3">
-            <div className="w-[auto] h-[auto] text-xl font-semibold">
+            <div className="w-[auto] h-[auto] text-xl font-semibold px-2">
               <p>Your Gullaks</p>
             </div>
             <div className="w-[auto] h-[auto] text-lg font-semibold text-blue-400 hover:cursor-pointer hover:text-blue-700">
@@ -28,7 +28,7 @@ function Dashboard() {
               </a>
             </div>
           </div>
-          <div className="w-[98%] h-[80%]  flex justify-around p-3">
+          <div className="w-[98%] h-[80%]  flex justify-evenly p-3">
             <Gullak></Gullak>
             <Gullak></Gullak>
             <Gullak></Gullak>
