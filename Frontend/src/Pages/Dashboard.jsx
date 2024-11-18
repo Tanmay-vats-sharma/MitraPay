@@ -4,6 +4,7 @@ import { Header } from "../Components/Common/header";
 import { Balance } from "../Components/Common/Balance&Contacts";
 import { Gullak } from "../Components/Common/Gullak";
 import { Transactions } from "../Components/Common/Transactions";
+import { Add_gullak } from "../Components/Common/Add-Gullak";
 function Dashboard() {
   return (
     <>
@@ -31,7 +32,7 @@ function Dashboard() {
           <div className="w-[98%] h-[80%]  flex justify-evenly p-3">
             <Gullak></Gullak>
             <Gullak></Gullak>
-            <Gullak></Gullak>
+            <Add_gullak></Add_gullak>
           </div>
         </div>
         <div className="bg-white shadow-lg  border-[1px]  rounded-lg  col-span-6 row-span-4">
