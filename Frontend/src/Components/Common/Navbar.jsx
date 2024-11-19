@@ -80,7 +80,7 @@ export function Navbar() {
                   </svg>
                 </span>
                 <span class="ml-2 text-lg tracking-wide truncate">
-                  Transfers
+                  Transactions
                 </span>
               </a>
             </li>
