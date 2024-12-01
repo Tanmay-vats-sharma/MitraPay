@@ -35,7 +35,7 @@ function Dashboard() {
             <Add_gullak></Add_gullak>
           </div>
         </div>
-        <div className="bg-white shadow-lg  border-[1px]  rounded-lg  col-span-6 row-span-4">
+        <div className="bg-white shadow-lg  border-[1px] flex flex-col items-center rounded-lg  col-span-6 row-span-4">
           <Transactions></Transactions>
         </div>
       </div>

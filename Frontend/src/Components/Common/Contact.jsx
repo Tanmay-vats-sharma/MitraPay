@@ -1,12 +1,12 @@
 import React from "react";
-import Profile_pic from "../../assets/Profile_pic.jpeg"
+import Boy from "../../assets/boy.png"
 
 export function Contact(){
   return (
-    <div className="flex justify-evenly  h-[18%] w-[100%] hover:bg-blue-100 border-l-4 border-transparent hover:border-indigo-500">
+    <div className="flex items-center justify-evenly  h-[18%] w-[100%] hover:bg-blue-100 border-l-4 border-transparent hover:border-indigo-500 px-1">
       <div className="w-[20%] h-[100%]   ">
-        <div className="h-[100%] w-[100%] overflow-hidden rounded-md  p-1">
-          <img src={Profile_pic} alt="" />
+        <div className="h-[99%] w-[100%] overflow-hidden rounded-full pt-[3px] ">
+          <img src={Boy} alt="" />
         </div>
       </div>
       <div className="w-[60%] h-[100%]  flex flex-col justify-center items-center p-1">
