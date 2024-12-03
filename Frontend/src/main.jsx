@@ -7,6 +7,7 @@ import Dashboard from './Pages/Dashboard.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import {Transaction} from "./Pages/Transaction.jsx"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/transactions" element={<Transaction />} />
           </Routes>
         </Router>
       </GoogleOAuthProvider>

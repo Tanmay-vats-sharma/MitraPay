@@ -63,6 +63,7 @@ export function Balance() {
           <Contact></Contact>
           <Contact></Contact>
           <Contact></Contact>
+          <Contact></Contact>
         </div>
       </div>
       </div>

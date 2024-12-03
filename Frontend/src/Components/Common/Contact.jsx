@@ -3,7 +3,7 @@ import Boy from "../../assets/boy.png"
 
 export function Contact(){
   return (
-    <div className="flex items-center justify-evenly  h-[18%] w-[100%] hover:bg-blue-100 border-l-4 border-transparent hover:border-indigo-500 px-1">
+    <div className="flex items-center  rounded-md justify-evenly  h-[18%] w-[100%] hover:bg-blue-100 border-b-2 border-gray-300 bg-gray-50 hover:border-b-blue-300 px-1">
       <div className="w-[20%] h-[100%]   ">
         <div className="h-[99%] w-[100%] overflow-hidden rounded-full pt-[3px] ">
           <img src={Boy} alt="" />

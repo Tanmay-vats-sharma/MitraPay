@@ -23,9 +23,10 @@ export function Gullak({gullak, color}) {
   return (
     <div
       style={{
-        border: `2px solid ${styles.borderColor}`,
+        border: `2px solid ${styles.borderColor
+        }`,
       }}
-      className="h-[100%] w-[30%] min-w-[30%] rounded-md shadow-lg bg-[#FAF9F6]"
+      className="h-[150px] w-[170px] min-w-[30%] rounded-md shadow-lg bg-[#FAF9F6]"
     >
       <div className="w-[100%] h-[30%] flex p-1">
         <div
@@ -37,21 +38,28 @@ export function Gullak({gullak, color}) {
         <div className="w-[40%] h-[100%] flex justify-between">
           {/* Add Money Button */}
           <div className="relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center hover:bg-gray-200 hover:rounded-full group">
-            <img src={Add_money} alt="Add Money" className="w-[1.7em] h-[1.7em]" />
-            <div className="w-[135%] absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-600 text-white text-xs rounded py-1 px-2 z-10">
-              Add Money
+            <img
+              src={Add_money}
+              alt="Add Money"
+              className="w-[1.7em] h-[1.7em]"
+            />
+            <div className="w-[75px] absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-600 text-white text-[0.7em] rounded py-1 px-2 z-10">
+              <p>Add Money</p>
             </div>
           </div>
 
           {/* Break Piggy Bank Button */}
           <div className="relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center hover:bg-gray-200 hover:rounded-full group">
-            <img src={piggy_break} alt="Break Piggy Bank" className="w-[1.7em] h-[1.7em]" />
-            <div className="w-[150%] absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-600 text-white text-xs rounded py-1 px-2 z-10">
-              Break Gullak
+            <img
+              src={piggy_break}
+              alt="Break Piggy Bank"
+              className="w-[1.7em] h-[1.7em]"
+            />
+            <div className="w-[80px] absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-600 text-white text-[0.7em] rounded py-1 px-2 z-10">
+              <p>Break Gullak</p>
             </div>
           </div>
         </div>
-
       </div>
       <div className="w-[100%] h-[60%] p-1 flex flex-col items-center justify-between">
         <div
