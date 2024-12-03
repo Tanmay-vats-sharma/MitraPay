@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Transaction } from "./Transaction"
 export function Transactions() {
   return (
     <>
@@ -13,8 +13,14 @@ export function Transactions() {
           </a>
         </div>
       </div>
-      <hr className="w-[95%] border-t-1 border-gray-400 items-center mb-2" />
-      <div></div>
+      <hr className="w-[95%] border-t-1 border-gray-400 items-center " />
+      <div className="w-[100%] h-[95%] flex flex-col items-center  justify-evenly px-4">
+        <Transaction></Transaction>
+        <Transaction></Transaction>
+        <Transaction></Transaction>
+        <Transaction></Transaction>
+        <Transaction></Transaction>
+      </div>
     </>
   );
 }

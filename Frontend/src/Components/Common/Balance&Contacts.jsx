@@ -6,7 +6,7 @@ import { Contact } from "./Contact";
 export function Balance() {
   
   const now = new Date().toLocaleString("en-US", {
-    timeZone: "Asia/Kolkata", // Set the time zone to IST
+    timeZone: "Asia/Kolkata",
     month: "short",
     day: "numeric",
     year: "numeric",
