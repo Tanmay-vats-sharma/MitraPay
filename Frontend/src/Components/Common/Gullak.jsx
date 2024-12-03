@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import Add_money from "../../Assets/Add_money.png";
 import piggy_break from "../../Assets/piggy-bank_break.png";
 
 //Blue, Green, Pink, Violet, Rose, Amber
-export function Gullak({gullak, color}) {
+export function Gullak({ gullak, color }) {
+  const [addMoneyHover, setAddMoneyHover] = useState(false);
+  const [breakMoneyHover, setBreakMoneyHover] = useState(false);
+
+  const handleMouseEnter = () => {
+    setAddMoneyHover(true);
+  };
+
+  const handleMouseLeave = () => {
+    setAddMoneyHover(false);
+  };
+
+  const handleMouseEnterBreak = () => {
+    setBreakMoneyHover(true);
+  };
+
+  const handleMouseLeaveBreak = () => {
+    setBreakMoneyHover(false);
+  };
+
   const percentage = Math.floor((gullak.currentAmount / gullak.totalAmount) * 100);
   console.log(percentage)
   console.log(gullak)
@@ -24,7 +43,7 @@ export function Gullak({gullak, color}) {
     <div
       style={{
         border: `2px solid ${styles.borderColor
-        }`,
+          }`,
       }}
       className="h-[150px] w-[170px] min-w-[30%] rounded-md shadow-lg bg-[#FAF9F6]"
     >
@@ -37,7 +56,11 @@ export function Gullak({gullak, color}) {
         </div>
         <div className="w-[40%] h-[100%] flex justify-between">
           {/* Add Money Button */}
-          <div className="relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center hover:bg-gray-200 hover:rounded-full group">
+          <div
+            style={{ backgroundColor: addMoneyHover ? styles.borderColor : "" }}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            className=" relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center hover:rounded-full group">
             <img
               src={Add_money}
               alt="Add Money"
@@ -49,7 +72,11 @@ export function Gullak({gullak, color}) {
           </div>
 
           {/* Break Piggy Bank Button */}
-          <div className="relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center hover:bg-gray-200 hover:rounded-full group">
+          <div
+            style={{ backgroundColor: breakMoneyHover ? styles.borderColor : "" }}
+            onMouseEnter={handleMouseEnterBreak}
+            onMouseLeave={handleMouseLeaveBreak} 
+            className="relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center hover:rounded-full group">
             <img
               src={piggy_break}
               alt="Break Piggy Bank"
