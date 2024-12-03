@@ -1,9 +1,9 @@
 import React from "react";
-import {Transaction } from "./Transaction"
+import { Transaction } from "./Transaction"
 export function Transactions() {
   return (
     <>
-      <div className="w-[100%] h-[15%] flex  p-1">
+      <div className="w-[100%] h-[15%] flex p-1">
         <div className="w-[90%]  flex justify-start text-xl font-semibold px-4">
           <p>Transaction History</p>
         </div>

@@ -5,7 +5,20 @@ import { Balance } from "../Components/Common/Balance&Contacts";
 import { Gullak } from "../Components/Common/Gullak";
 import { Transactions } from "../Components/Common/Transactions";
 import { Add_gullak } from "../Components/Common/Add-Gullak";
+
+//Blue,Green,Pink,Violet,Rose,Amber
 function Dashboard() {
+  const gullaks = [
+    { name: "Bike", totalAmount: 13000, currentAmount: 5000 },
+    { name: "Trip", totalAmount: 20000, currentAmount: 7000 },
+    { name: "Savings", totalAmount: 50000, currentAmount: 30000 },
+    { name: "Shopping", totalAmount: 10000, currentAmount: 5000 },
+    { name: "Party", totalAmount: 5000, currentAmount: 2000 },
+    { name: "Gift", totalAmount: 2000, currentAmount: 1000 },
+  ];
+
+  const colors = ["blue", "amber", "rose", "green", "pink", "violet"];
+
   return (
     <>
       <div className="grid grid-cols-10 grid-rows-8 gap-3 bg-blue-50  p-5 min-h-screen \">
@@ -19,13 +32,18 @@ function Dashboard() {
             </div>
             <div className="w-[auto] h-[auto] text-lg font-semibold text-blue-400 hover:cursor-pointer hover:text-blue-700">
               <a href="#">
-                <p>Veiw All</p>
+                <p>View All</p>
               </a>
             </div>
           </div>
+
           <div className="w-[98%] h-[80%]  flex justify-evenly p-3">
-            <Gullak></Gullak>
-            <Gullak></Gullak>
+            <Gullak gullak={gullaks[0]} color={"amber"}/>
+            <Gullak gullak={gullaks[1]} color={"green"}/>
+            {/* <Gullak gullak={gullaks[1]} color={"violet"}/>
+            <Gullak gullak={gullaks[1]} color={"pink"}/>
+            <Gullak gullak={gullaks[1]} color={"rose"}/>
+            <Gullak gullak={gullaks[1]} color={"blue"}/> */}
             <Add_gullak></Add_gullak>
           </div>
         </div>

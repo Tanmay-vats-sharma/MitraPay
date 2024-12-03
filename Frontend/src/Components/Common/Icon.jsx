@@ -17,13 +17,13 @@ export default function Icon({ path, message, pingEffect = false}) {
                 className="h-6 w-6"
             >
                 <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d={path}
                 />
             </svg>
-            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-600 text-white text-xs rounded py-1 px-2">
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-600 text-white text-xs rounded py-1 px-2 z-0">
                 {message}
             </div>
         </button>
