@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {Transaction} from "./Pages/Transaction.jsx"
+import {Gullak} from "./Pages/Gullak.jsx"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/transactions" element={<Transaction />} />
+            <Route path="/gullaks" element={<Gullak />} />
           </Routes>
         </Router>
       </GoogleOAuthProvider>
