@@ -4,6 +4,7 @@ import loimg from '../../Assets/loimg.png';
 export function Navbar() {
     return (
       <>
+        <div className=" col-span-2 bg-white shadow-xl rounded-lg row-span-7  p-4 ">
         <div className="flex justify-between flex-col w-[90%] h-[100%]">
           <ul class="flex flex-col  space-y-2  h-[auto] w-[100%] ">
             <li>
@@ -174,7 +175,8 @@ export function Navbar() {
               </li>
             </ul>
           </div>
-        </div>
+          </div>
+          </div>
       </>
     );
 }

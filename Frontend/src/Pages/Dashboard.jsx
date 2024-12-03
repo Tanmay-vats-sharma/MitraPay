@@ -9,15 +9,9 @@ function Dashboard() {
   return (
     <>
       <div className="grid grid-cols-10 grid-rows-8 gap-3 bg-blue-50  p-5 min-h-screen \">
-        <div className=" col-span-8 row-span-1 bg-white shadow-md  flex items-center justify-between rounded-lg ">
-          <Header></Header>
-        </div>
-        <div className=" bg-white shadow-2xl rounded-lg col-span-2 row-span-8 p-4">
-          <Balance></Balance>
-        </div>
-        <div className=" col-span-2 bg-white shadow-xl rounded-lg row-span-7  p-4 ">
-          <Navbar></Navbar>
-        </div>
+         <Header></Header>
+         <Balance></Balance>
+        <Navbar></Navbar>
         <div className="bg-white  rounded-lg flex flex-col justify-evenly shadow-lg items-center col-span-6 row-span-3 ">
           <div className="w-[100%] h-[20%]  flex justify-between  items-center p-3">
             <div className="w-[auto] h-[auto] text-xl font-semibold px-2">

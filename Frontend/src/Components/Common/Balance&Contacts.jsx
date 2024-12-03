@@ -17,6 +17,7 @@ export function Balance() {
 
   return (
     <>
+      <div className=" bg-white shadow-2xl rounded-lg col-span-2 row-span-8 p-4">
       <div className=" h-[43%]">
         <div className=" h-[12%] w-[100%] flex justify-end items-center p-1">
           <div className=" w-[12%] h-[100%]">
@@ -64,6 +65,7 @@ export function Balance() {
           <Contact></Contact>
         </div>
       </div>
-    </>
+      </div>
+      </>
   );
 }
