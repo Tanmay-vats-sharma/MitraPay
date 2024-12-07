@@ -60,13 +60,13 @@ export function Gullak({ gullak, color }) {
             style={{ backgroundColor: addMoneyHover ? styles.borderColor : "" }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className=" relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center hover:rounded-full group">
+            className=" relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center rounded-full group">
             <img
               src={Add_money}
               alt="Add Money"
               className="w-[1.7em] h-[1.7em]"
             />
-            <div className="w-[75px] absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-600 text-white text-[0.7em] rounded py-1 px-2 z-10">
+            <div className="w-[75px] absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden rounded-md group-hover:block bg-gray-600 text-white text-[0.7em]  py-1 px-2 z-10">
               <p>Add Money</p>
             </div>
           </div>
@@ -76,13 +76,13 @@ export function Gullak({ gullak, color }) {
             style={{ backgroundColor: breakMoneyHover ? styles.borderColor : "" }}
             onMouseEnter={handleMouseEnterBreak}
             onMouseLeave={handleMouseLeaveBreak} 
-            className="relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center hover:rounded-full group">
+            className="relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center rounded-full group">
             <img
               src={piggy_break}
               alt="Break Piggy Bank"
               className="w-[1.7em] h-[1.7em]"
             />
-            <div className="w-[80px] absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-600 text-white text-[0.7em] rounded py-1 px-2 z-10">
+            <div className="w-[80px] absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden rounded-md group-hover:block bg-gray-600 text-white text-[0.7em] py-1 px-2 z-10">
               <p>Break Gullak</p>
             </div>
           </div>

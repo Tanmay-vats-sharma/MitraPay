@@ -23,7 +23,7 @@ export default function Icon({ path, message, pingEffect = false}) {
                     d={path}
                 />
             </svg>
-            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-600 text-white text-xs rounded py-1 px-2 z-0">
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-600 text-white text-xs rounded-md py-1 px-2 z-0">
                 {message}
             </div>
         </button>

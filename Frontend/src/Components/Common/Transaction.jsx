@@ -4,7 +4,7 @@ import Boy from "../../assets/boy.png";
 export function Transaction() {
   return (
     <>
-      <a href="" className="flex justify-evenly items-center w-[750px] h-[40px] border-b-2 bg-gray-50 px-1 border-blue-200 hover:bg-blue-100 rounded-md hover:border-b-blue-400 mb-[6px]">
+      <a href="" className="flex justify-evenly items-center w-[730px] h-[40px] border-b-2 bg-gray-50 px-1 border-blue-200 hover:bg-blue-100 rounded-md hover:border-b-blue-400 mb-[6px] ">
         <div className="w-[40%] h-[95%]     px-1 flex items-center">
           <div className="w-[14%] h-[98%] flex items-center  ">
             <div className="h-[97%] w-[90%] overflow-hidden rounded-full  ">
