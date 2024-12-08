@@ -22,7 +22,7 @@ export function Gullaks() {
             <p>Your Gullaks</p>
           </div>
           <div className="w-[auto] h-[auto] text-lg font-semibold text-blue-400 hover:cursor-pointer hover:text-blue-700 px-3">
-            <a href="#">
+            <a href="/gullaks">
               <p>View All</p>
             </a>
           </div>
