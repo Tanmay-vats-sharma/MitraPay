@@ -1,6 +1,7 @@
 import React from "react";
 import { AddMoney } from "../Modals/addMoney";
-import { useModal } from "./ModalProvider";
+import { useModal } from "../../StateProvider/ModalProvider";
+import { AddGullak } from "../Modals/AddGullak";
 
 export default function Modal() {
     const { modalContent, closeModal } = useModal();
@@ -27,6 +28,7 @@ export default function Modal() {
                 {/* Modal Content */}
                 <div className="h-full flex items-center justify-center">
                     {modalContent == "addMoney" && <AddMoney />}
+                    {modalContent == "addGullak" && <AddGullak />}
                 </div>
             </div>
         </div>

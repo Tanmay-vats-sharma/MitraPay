@@ -2,8 +2,10 @@ import React from "react";
 import Profile_pic from "../../assets/Profile_pic.jpeg";
 import Icon from "./Icon";
 import { Contact } from "./Contact";
+import { useStateContext } from "../../StateProvider/StateProvider";
 
 export function Balance() {
+  const { totalAmount } = useStateContext();
   
   const now = new Date().toLocaleString("en-US", {
     timeZone: "Asia/Kolkata",
@@ -41,7 +43,7 @@ export function Balance() {
             <p>Total Balance</p>
           </div>
           <div className=" w-[100%] h-[33%] text-2xl text-blue-700 font-semibold  flex justify-center ">
-            <p>₹5000/-</p>
+            <p>₹{totalAmount}/-</p>
           </div>
           <div className=" w-[100%] h-[23%] text-gray-500 text-s tracking-wide flex justify-center ">
             <p>{now}</p>

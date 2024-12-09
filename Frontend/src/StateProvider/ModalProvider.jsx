@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext,useEffect } from 'react';
-import Modal from "./Modal";
+import Modal from "../Components/Common/Modal";
 
 // Create Context
 // Context is a State Management tool in React. It is designed to share data that can be considered “global” for a tree of React components.

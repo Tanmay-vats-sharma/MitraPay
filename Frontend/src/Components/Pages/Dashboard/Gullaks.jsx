@@ -1,17 +1,10 @@
-import React from "react";
-// import { Gullak } from "../../Components/Common/Gullak";
-// import { Add_gullak } from "../../Components/Common/Add-Gullak";
+import React, {useState} from "react";
 import { Gullak } from "../../Common/Gullak"
 import {Add_gullak} from "../../Common/Add-Gullak"
+import { useStateContext } from "../../../StateProvider/StateProvider";
+
 export function Gullaks() {
-    const gullaks = [
-      { name: "Bike", totalAmount: 13000, currentAmount: 5000 },
-      { name: "Trip", totalAmount: 20000, currentAmount: 7000 },
-      { name: "Savings", totalAmount: 50000, currentAmount: 30000 },
-      { name: "Shopping", totalAmount: 10000, currentAmount: 5000 },
-      { name: "Party", totalAmount: 5000, currentAmount: 2000 },
-      { name: "Gift", totalAmount: 2000, currentAmount: 1000 },
-    ];
+    const { gullaks } = useStateContext();
 
     const colors = ["blue", "amber", "rose", "green", "pink", "violet"];
   return (

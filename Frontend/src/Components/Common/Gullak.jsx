@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Add_money from "../../Assets/Add_money.png";
 import piggy_break from "../../Assets/piggy-bank_break.png";
-import { useModal } from "./ModalProvider";
+import { useModal } from "../../StateProvider/ModalProvider";
+import { useStateContext } from "../../StateProvider/StateProvider";
 
 //Blue, Green, Pink, Violet, Rose, Amber
 export function Gullak({ gullak, color }) {
   const  {openModal, closeModal}  = useModal();
+  const { gullaks, removeGullak } = useStateContext();
   const [addMoneyHover, setAddMoneyHover] = useState(false);
   const [breakMoneyHover, setBreakMoneyHover] = useState(false);
 
@@ -77,7 +79,7 @@ export function Gullak({ gullak, color }) {
             style={{ backgroundColor: breakMoneyHover ? styles.borderColor : "" }}
             onMouseEnter={handleMouseEnterBreak}
             onMouseLeave={handleMouseLeaveBreak} 
-            onClick={() => closeModal()}
+            onClick={() => removeGullak(gullak.name)}
             className="relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center rounded-full group">
             <img
               src={piggy_break}

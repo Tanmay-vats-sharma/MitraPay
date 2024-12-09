@@ -9,27 +9,30 @@ import 'react-toastify/dist/ReactToastify.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Transaction } from "./Pages/Transaction.jsx"
 import { Gullak } from "./Pages/Gullak.jsx"
-import { ModalProvider } from './Components/Common/ModalProvider.jsx';
+import { ModalProvider } from './StateProvider/ModalProvider.jsx';
+import { StateProvider } from './StateProvider/StateProvider.jsx';
 import {Profile_page} from "./Pages/Profile_page.jsx"
 
 function App() {
   return (
     <StrictMode>
       <ToastContainer />
-      <ModalProvider >
-        <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
-          <Router>
-            <Routes>
-              <Route path="/" element={<Navigate to="/login" />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/transactions" element={<Transaction />} />
-              <Route path="/profile" element={<Profile_page />} />
+      <StateProvider>
+        <ModalProvider >
+          <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
+            <Router>
+              <Routes>
+                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/transactions" element={<Transaction />} />
+                <Route path="/profile" element={<Profile_page />} />
               <Route path="/gullaks" element={<Gullak />} />
-            </Routes>
-          </Router>
-        </GoogleOAuthProvider>
-      </ModalProvider>
+              </Routes>
+            </Router>
+          </GoogleOAuthProvider>
+        </ModalProvider>
+      </StateProvider>
     </StrictMode>
   );
 }
