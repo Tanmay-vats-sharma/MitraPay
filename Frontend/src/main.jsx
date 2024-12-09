@@ -10,6 +10,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Transaction } from "./Pages/Transaction.jsx"
 import { Gullak } from "./Pages/Gullak.jsx"
 import { ModalProvider } from './Components/Common/ModalProvider.jsx';
+import {Profile_page} from "./Pages/Profile_page.jsx"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/transactions" element={<Transaction />} />
+              <Route path="/profile" element={<Profile_page />} />
               <Route path="/gullaks" element={<Gullak />} />
             </Routes>
           </Router>
