@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Add_money from "../../Assets/Add_money.png";
 import piggy_break from "../../Assets/piggy-bank_break.png";
+import { useModal } from "./ModalProvider";
 
 //Blue, Green, Pink, Violet, Rose, Amber
 export function Gullak({ gullak, color }) {
+  const  {openModal, closeModal}  = useModal();
   const [addMoneyHover, setAddMoneyHover] = useState(false);
   const [breakMoneyHover, setBreakMoneyHover] = useState(false);
 
@@ -24,8 +26,6 @@ export function Gullak({ gullak, color }) {
   };
 
   const percentage = Math.floor((gullak.currentAmount / gullak.totalAmount) * 100);
-  console.log(percentage)
-  console.log(gullak)
 
   // Define static color mappings
   const colorStyles = {
@@ -60,6 +60,7 @@ export function Gullak({ gullak, color }) {
             style={{ backgroundColor: addMoneyHover ? styles.borderColor : "" }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onClick={() => openModal("addMoney")}
             className=" relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center rounded-full group">
             <img
               src={Add_money}
@@ -76,6 +77,7 @@ export function Gullak({ gullak, color }) {
             style={{ backgroundColor: breakMoneyHover ? styles.borderColor : "" }}
             onMouseEnter={handleMouseEnterBreak}
             onMouseLeave={handleMouseLeaveBreak} 
+            onClick={() => closeModal()}
             className="relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center rounded-full group">
             <img
               src={piggy_break}
