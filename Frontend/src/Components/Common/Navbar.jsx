@@ -1,5 +1,6 @@
 import React from 'react';
 import loimg from '../../Assets/loimg.png';
+import gullak from '../../Assets/Add-piggy.png';
 
 export function Navbar() {
     return (
@@ -137,7 +138,7 @@ export function Navbar() {
                   </svg>
                 </span>
                 <span className="ml-2 text-lg tracking-wide truncate">
-                  Settings
+                  Gullaks
                 </span>
               </a>
             </li>

@@ -98,6 +98,16 @@ export const StateProvider = ({ children }) => {
     
         toast.success("Money added successfully!");
     };
+
+    const addMoney = (amount) => {
+        setTotalAmount(totalAmount + amount);
+        toast.success(`₹${amount} added to your wallet!`);
+    };
+
+    const sendMoney = (userDetails, amount) => {
+        // Simulated money transfer action
+        toast.success(`₹${amount} sent to ${userDetails?.phone}!`);
+    };
     
 
     const IncreaseAmount = (amount) => {
@@ -109,7 +119,7 @@ export const StateProvider = ({ children }) => {
     }
       
     return (
-        <StateContext.Provider value={{ totalAmount, gullaks, addGullak, removeGullak, IncreaseAmount, DecreaseAmount, addMoneyInGullak }}>
+        <StateContext.Provider value={{ totalAmount, gullaks, addGullak, removeGullak, addMoneyInGullak, addMoney, sendMoney }}>
             {children}
         </StateContext.Provider>
     );

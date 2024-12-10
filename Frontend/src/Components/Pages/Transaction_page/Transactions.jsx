@@ -1,7 +1,9 @@
 import React from "react";
 import { Transaction } from "../../Common/Transaction";
 import Add_money_button from "../../../Assets/Add_money_button.png"
+import { useModal } from "../../../StateProvider/ModalProvider";
 export function Transactions() {
+  const { openModal } = useModal();
   return (
     <>
       <div className="bg-white shadow-lg justify-evenly overflow-y-hidden border-[1px] flex flex-col items-center rounded-lg py-3 col-span-6 row-span-7">
@@ -10,7 +12,10 @@ export function Transactions() {
             <p>Transaction History</p>
           </div>
           <div className="w-[45%] h-[100%] flex justify-around">
-            <button className="bg-blue-600 w-[40%] flex rounded-md  justify-center px-1 items-center hover:bg-blue-800 ">
+            <button
+              onClick={() => openModal({ type: "addMoneyInWallet" })}
+              className="bg-blue-600 w-[40%] flex rounded-md  justify-center px-1 items-center hover:bg-blue-800 "
+            >
               <div className="w-[20%] mb-[1px] text-white text-[25px] font-mono ">
                 +
               </div>
@@ -18,7 +23,10 @@ export function Transactions() {
                 Add Money
               </div>
             </button>
-            <button className="bg-blue-600 w-[40%] flex rounded-md border-[1px] border-gray-400 justify-center p-1 items-center hover:bg-blue-800">
+            <button
+              onClick={() => openModal({ type: "sendMoney" })}
+              className="bg-blue-600 w-[40%] flex rounded-md border-[1px] border-gray-400 justify-center p-1 items-center hover:bg-blue-800"
+            >
               <div className="w-[20%]  text-white text-[20px] font-mono">
                 ↗
               </div>
