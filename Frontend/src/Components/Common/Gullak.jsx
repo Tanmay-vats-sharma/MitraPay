@@ -3,11 +3,12 @@ import Add_money from "../../Assets/Add_money.png";
 import piggy_break from "../../Assets/piggy-bank_break.png";
 import { useModal } from "../../StateProvider/ModalProvider";
 import { useStateContext } from "../../StateProvider/StateProvider";
+import config from "../../Config/config.json";
 
 //Blue, Green, Pink, Violet, Rose, Amber
 export function Gullak({ gullak, color }) {
-  const  {openModal, closeModal}  = useModal();
-  const { gullaks, removeGullak } = useStateContext();
+  const  {openModal}  = useModal();
+  const { removeGullak } = useStateContext();
   const [addMoneyHover, setAddMoneyHover] = useState(false);
   const [breakMoneyHover, setBreakMoneyHover] = useState(false);
 
@@ -30,14 +31,7 @@ export function Gullak({ gullak, color }) {
   const percentage = Math.floor((gullak.currentAmount / gullak.totalAmount) * 100);
 
   // Define static color mappings
-  const colorStyles = {
-    blue: { borderColor: "#93C5FD", textColor: "#3B82F6", bgColor: "#3B82F6" },
-    green: { borderColor: "#86EFAC", textColor: "#22C55E", bgColor: "#22C55E" },
-    pink: { borderColor: "#F9A8D4", textColor: "#EC4899", bgColor: "#EC4899" },
-    violet: { borderColor: "#C4B5FD", textColor: "#8B5CF6", bgColor: "#8B5CF6" },
-    rose: { borderColor: "#FECACA", textColor: "#F43F5E", bgColor: "#F43F5E" },
-    amber: { borderColor: "#FDE68A", textColor: "#F59E0B", bgColor: "#F59E0B" },
-  };
+  const colorStyles = config.gullaks.colorStyles;
 
   const styles = colorStyles[color] || colorStyles.blue; // Default to blue if color is not defined
 
@@ -62,7 +56,7 @@ export function Gullak({ gullak, color }) {
             style={{ backgroundColor: addMoneyHover ? styles.borderColor : "" }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={() => openModal("addMoney")}
+            onClick={() => openModal({ type: "addMoney", data: gullak , color: color})}
             className=" relative w-[48%] h-[100%] p-1 flex flex-col items-center justify-center rounded-full group">
             <img
               src={Add_money}

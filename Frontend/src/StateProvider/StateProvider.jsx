@@ -38,6 +38,8 @@ export const StateProvider = ({ children }) => {
             ...gullaks,
             { name: name, totalAmount: totalAmount, currentAmount: 0 },
         ]);
+
+        toast.success("Gullak Added");
     };
 
     const removeGullak = (name) => {
@@ -58,6 +60,46 @@ export const StateProvider = ({ children }) => {
         }, 2100);
     };
 
+    const addMoneyInGullak = (name, amount) => {
+        // Find the Gullak to add money
+        const gullakToAddMoney = gullaks.find((gullak) => gullak.name === name);
+    
+        if (!gullakToAddMoney) {
+            toast.error("Gullak not found!");
+            return;
+        }
+    
+        // Convert currentAmount and amount to numbers
+        const currentAmount = Number(gullakToAddMoney.currentAmount);
+        const addAmount = Number(amount);
+
+        if (addAmount <= 0) {
+            toast.error("Please enter a valid amount!");
+            return;
+        }
+    
+        // Check if the amount exceeds the total amount
+        if (currentAmount + addAmount > gullakToAddMoney.totalAmount) {
+            toast.error("Amount exceeds the total amount!");
+            return;
+        }
+    
+        // Add the money to the Gullak
+        gullakToAddMoney.currentAmount = currentAmount + addAmount;
+    
+        // Update the Gullak
+        const newGullaks = gullaks.map((gullak) =>
+            gullak.name === name ? gullakToAddMoney : gullak
+        );
+        setGullaks(newGullaks);
+    
+        // Update the total amount
+        DecreaseAmount(addAmount);
+    
+        toast.success("Money added successfully!");
+    };
+    
+
     const IncreaseAmount = (amount) => {
         setTotalAmount(totalAmount + amount);
     };
@@ -67,7 +109,7 @@ export const StateProvider = ({ children }) => {
     }
       
     return (
-        <StateContext.Provider value={{ totalAmount, gullaks, addGullak, removeGullak, IncreaseAmount, DecreaseAmount }}>
+        <StateContext.Provider value={{ totalAmount, gullaks, addGullak, removeGullak, IncreaseAmount, DecreaseAmount, addMoneyInGullak }}>
             {children}
         </StateContext.Provider>
     );

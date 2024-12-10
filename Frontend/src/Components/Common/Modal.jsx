@@ -5,6 +5,7 @@ import { AddGullak } from "../Modals/AddGullak";
 
 export default function Modal() {
     const { modalContent, closeModal } = useModal();
+    const modal = modalContent?.type;
     console.log("Modal Content: ", modalContent);
     return (
         // <div>
@@ -15,7 +16,7 @@ export default function Modal() {
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
         >
             <div
-                className="relative bg-white w-[40%] h-[50%] rounded-lg shadow-lg p-4"
+                className="relative bg-gray-50 w-[40%] h-[50%] rounded-lg shadow-lg p-4"
             >
                 {/* Close Button */}
                 <button
@@ -27,8 +28,8 @@ export default function Modal() {
 
                 {/* Modal Content */}
                 <div className="h-full flex items-center justify-center">
-                    {modalContent == "addMoney" && <AddMoney />}
-                    {modalContent == "addGullak" && <AddGullak />}
+                    {modal == "addMoney" && <AddMoney />}
+                    {modal == "addGullak" && <AddGullak />}
                 </div>
             </div>
         </div>

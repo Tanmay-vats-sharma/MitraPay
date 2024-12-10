@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import { Gullak } from "../../Common/Gullak"
 import {Add_gullak} from "../../Common/Add-Gullak"
 import { useStateContext } from "../../../StateProvider/StateProvider";
+import config from "../../../Config/config.json";
 
 export function Gullaks() {
     const { gullaks } = useStateContext();
 
-    const colors = ["blue", "amber", "rose", "green", "pink", "violet"];
+    const colors = config.gullaks.colors;
   return (
     <>
       <div className="bg-white  rounded-lg flex flex-col justify-evenly shadow-lg items-center col-span-6 row-span-3 ">

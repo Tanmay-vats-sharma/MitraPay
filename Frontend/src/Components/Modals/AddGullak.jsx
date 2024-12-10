@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import { useStateContext } from "../../StateProvider/StateProvider";
 import { useModal } from "../../StateProvider/ModalProvider";
-import { toast } from 'react-toastify';
+import config from "../../Config/config.json";
 
 export function AddGullak() {
-  const {closeModal } = useModal();
-  const { addGullak } = useStateContext();
+  const {openModal } = useModal();
+  const { gullaks, addGullak } = useStateContext();
   const [gullakName, setGullakName] = useState("");
   const [totalAmount, setTotalAmount] = useState("");
+
+  const colors = config.gullaks.colors;
+  const colorStyles = config.gullaks.colorStyles;
+
+  // Calculate the style index based on the number of existing gullaks
+  const styleIndex = (gullaks.length) % colors.length;
+  const selectedColor = colors[styleIndex];
+  const styles = colorStyles[selectedColor] || colorStyles.blue;
 
   const handleAddGullak = () => {
     if (gullakName && totalAmount && !isNaN(totalAmount)) {
@@ -15,8 +23,7 @@ export function AddGullak() {
       addGullak(gullakName,totalAmount);
       setGullakName("");
       setTotalAmount("");
-      toast.success("Gullak Added");
-      closeModal();
+      openModal({ type: "addMoney", data: { name:gullakName, totalAmount }, color: selectedColor });
     } else {
       alert("Please enter valid details.");
     }
@@ -24,11 +31,15 @@ export function AddGullak() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
-      <div className="bg-white rounded-lg shadow-md p-4 w-[90%] max-w-[400px]">
+      <div
+        style={{ borderColor: styles.borderColor }}
+        className="bg-white rounded-lg shadow-md p-4 w-[90%] max-w-[400px] border-2"
+      >
         {/* Gullak Name Input */}
         <label
           htmlFor="gullakName"
-          className="block text-gray-700 text-lg font-semibold mb-2"
+          style={{ color: styles.textColor }}
+          className="block text-lg font-semibold mb-2"
         >
           Gullak Name
         </label>
@@ -37,14 +48,16 @@ export function AddGullak() {
           id="gullakName"
           value={gullakName}
           onChange={(e) => setGullakName(e.target.value)}
-          className="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:ring-2"
+          style={{ borderColor: styles.borderColor, focus: styles.borderColor }}
           placeholder="Enter Gullak name"
         />
 
         {/* Total Amount Input */}
         <label
           htmlFor="totalAmount"
-          className="block text-gray-700 text-lg font-semibold mb-2"
+          style={{ color: styles.textColor }}
+          className="block text-lg font-semibold mb-2"
         >
           Total Amount
         </label>
@@ -53,14 +66,16 @@ export function AddGullak() {
           id="totalAmount"
           value={totalAmount}
           onChange={(e) => setTotalAmount(e.target.value)}
-          className="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:ring-2"
+          style={{ borderColor: styles.borderColor, focus: styles.borderColor }}
           placeholder="Enter total amount"
         />
 
         {/* Add Gullak Button */}
         <button
           onClick={handleAddGullak}
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
+          style={{ backgroundColor: styles.bgColor }}
+          className="w-full text-white py-2 rounded-md hover:opacity-90 transition duration-200"
         >
           Add Gullak
         </button>
