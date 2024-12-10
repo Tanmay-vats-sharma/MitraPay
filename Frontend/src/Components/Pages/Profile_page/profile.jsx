@@ -24,25 +24,100 @@ export function Profile() {
           <div className="flex justify-start w-[100%] h-[14%]  text-2xl font-semibold tracking-tighter px-3">
             <p>Personal Information</p>
           </div>
-          <div className="flex flex-col justify-evenly w-[100%] h-[86%] border-2 border-red-400  ">
-            <div className="h-[20%] border-2 border-red-700 flex ">
-              <div className="w-[50%] h-[100%] flex flex-col justify-evenly" >
-                <div className="h-[50%] w-[100%] text-lg font-semibold flex justify-start px-2 items-center">
+          <div className="flex flex-col justify-evenly w-[100%] h-[86%]   ">
+            <div className="h-[25%]  flex w-[100%] justify-evenly ">
+              <div className="w-[30%] h-[100%] flex flex-col justify-between">
+                <div className="h-[35%] w-[100%] text-lg font-bold flex justify-start px-3 items-center">
                   <p>First Name</p>
                 </div>
-                <div className="h-[50%] w-[100%] flex justify-start px-2">
-                   <input type="text" placeholder="Tanmay Sharma" className="h-[100%] px-2"/>
+                <div className="h-[60%] w-[100%] flex justify-start px-3">
+                  <input
+                    type="text"
+                    placeholder="Tanmay"
+                    className="h-[100%] px-2 border-b-[2px]  rounded-md  bg-gray-100   border-blue-500 focus:border-blue-800  w-[100%] outline-none text-md"
+                  />
                 </div>
               </div>
-              <div className="w-[50%] h-[100%]">
-                <div className=""></div>
-                <div className=""></div>
+              <div className="w-[30%] h-[100%] flex flex-col justify-evenly">
+                <div className="h-[35%] w-[100%] text-lg font-bold flex justify-start px-3 items-center">
+                  <p>Middle Name</p>
+                </div>
+                <div className="h-[60%] w-[100%] flex justify-start px-3">
+                  <input
+                    type="text"
+                    placeholder="Sharma"
+                    className="h-[100%] px-2 border-b-[2px]  rounded-md  bg-gray-100   border-blue-500 focus:border-blue-800  w-[100%] outline-none text-md"
+                  />
+                </div>
+              </div>
+              <div className="w-[30%] h-[100%] flex flex-col justify-evenly">
+                <div className="h-[35%] w-[100%] text-lg font-bold flex justify-start px-3 items-center">
+                  <p>Last Name</p>
+                </div>
+                <div className="h-[60%] w-[100%] flex justify-start px-3">
+                  <input
+                    type="text"
+                    placeholder="Sharma"
+                    className="h-[100%] px-2 border-b-[2px]  rounded-md  bg-gray-100 border-blue-500 focus:border-blue-800  w-[100%] outline-none text-md"
+                  />
+                </div>
               </div>
             </div>
-            <div className="h-[20%] "></div>
-            <div className="h-[20%] "></div>
-            <div className="h-[20%] "></div>
-            <div className="h-[20%] "></div>
+            <div className="h-[25%]  flex w-[100%] justify-evenly ">
+              <div className="w-[63%] h-[100%] flex flex-col justify-evenly">
+                <div className="h-[35%] w-[100%] text-lg font-bold flex justify-start px-3 items-center">
+                  <p>Email</p>
+                </div>
+                <div className="h-[60%] w-[100%] flex justify-start px-3">
+                  <input
+                    type="email"
+                    placeholder="XYZ@gmail.com"
+                    className="h-[100%] px-2 border-b-[2px]  rounded-md  bg-gray-100  border-blue-500 focus:border-blue-800  w-[100%] outline-none text-md"
+                    name="email"
+                  />
+                </div>
+              </div>
+              
+              <div className="w-[30%] h-[100%] flex flex-col justify-evenly">
+                <div className="h-[35%] w-[100%] text-lg font-bold flex justify-start px-3 items-center">
+                  <p>Phone No. </p>
+                </div>
+                <div className="h-[60%] w-[100%] flex justify-start px-3">
+                  <input
+                    type="text"
+                    placeholder="Phone No."
+                    className="h-[100%] px-2 border-b-[2px]  rounded-md  bg-gray-100  border-blue-500 focus:border-blue-800  w-[100%] outline-none text-md"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="h-[25%]  flex w-[100%] justify-evenly ">
+              <div className="w-[63%] h-[100%] flex flex-col justify-evenly">
+                <div className="h-[35%] w-[100%] text-lg font-bold flex justify-start px-3 items-center">
+                  <p>Address</p>
+                </div>
+                <div className="h-[60%] w-[100%] flex justify-start px-3">
+                  <input
+                    type="text"
+                    placeholder="H.NO.- 149, street no.- 23, city, State"
+                    className="h-[100%] px-2 border-b-[2px]  rounded-md    bg-gray-100 border-blue-500 focus:border-b-blue-800  w-[100%] outline-none text-md "
+                  />
+                </div>
+              </div>
+              
+              <div className="w-[30%] h-[100%] flex flex-col justify-evenly">
+                <div className="h-[35%] w-[100%] text-lg font-bold flex justify-start px-3 items-center">
+                  <p>Password</p>
+                </div>
+                <div className="h-[60%] w-[100%] flex justify-start px-3">
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    className="h-[100%] px-2 border-b-[2px]  rounded-md    bg-gray-100   border-blue-500 focus:border-blue-800  w-[100%] outline-none text-md"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
