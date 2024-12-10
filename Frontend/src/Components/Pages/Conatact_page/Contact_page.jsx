@@ -4,28 +4,54 @@ import { Contact } from "./Contact";
 export function Contact_page() {
   return (
     <>
-      <div className="bg-white  rounded-lg flex flex-col justify-evenly shadow-lg items-center col-span-6 row-span-7 ">
-        {/* <div className="w-[100%] h-[13%] border-[1px] border-slate-500 bg-gray-50 rounded-t-lg flex justify-between item p-1">
-          <div className="w-[70%]  h-[100%]  flex items-center px-2">
-            <div className="h-[95%] w-[10%] overflow-hidden rounded-full">
-              <img src={Boy} alt="" />
-            </div>
-            <div className="w-[60%] h-[100%]  flex flex-col justify-evenly items-center p-1">
-              <div className="w-[90%]  h-[50%] text-[1.2rem] font-semibold tracking-tighter">
-                <p>Tanmay Sharma</p>
-              </div>
-              <div className=" w-[90%]  h-[50%] text-[0.9rem] text-gray-400 font-semibold flex items-center">
-                <p>8076917248</p>
-              </div>
-            </div>
-          </div>
-          <div className="w-[20%] border-2 border-red-400 h-[100%] flex justify-end p-4">
-            <Dropdown></Dropdown>
-          </div>
-        </div> */}
+      <div className="bg-blue-50  rounded-lg flex flex-col justify-evenly shadow-lg items-center col-span-6 row-span-7 ">
         <Contact></Contact>
-        <div className="w-[100%] h-[75%] border-2 border-red-500 bg-blue-50"></div>
-        <div className="w-[100%] h-[12%] border-2 border-red-500 bg-blue-50"></div>
+        <div className="w-[100%] h-[75%]  "></div>
+        <div className="w-[100%] h-[12%]   flex justify-around items-center">
+          <div className="w-[5%] h-[80%]  flex justify-center items-center">
+            <button class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="h-6 w-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 10l4-4m0 0l-4-4m4 4H7m10 4l-4 4m0 0l4 4m-4-4H7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div className="w-[80%] h-[80%]  flex justify-center items-center">
+            <input
+              type="text"
+              placeholder="Type your Message here..."
+              className="w-[100%] h-[100%] p-2 rounded-2xl bg-gray-50 outline-none border-[1px] border-black"
+            />
+          </div>
+          <div className="w-[5%] h-[80%] border-2 flex justify-center items-center">
+            <button class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="h-6 w-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 10l4-4m0 0l-4-4m4 4H7m10 4l-4 4m0 0l4 4m-4-4H7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -12,7 +12,7 @@ const Dropdown = () => {
   return (
     <div className="relative inline-block text-left ">
       <button
-        className="text-2xl focus:outline-none flex items-center h-[100%]"
+        className="text-2xl focus:outline-none  flex items-center h-[100%]"
         onClick={toggleDropdown}
       >
         ☰
