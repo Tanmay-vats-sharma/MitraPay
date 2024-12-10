@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Contact } from "./Contact";
+import { Message } from "./Message";
+import { Chat } from "./Chat";
 
 export function Contact_page() {
+
   return (
     <>
       <div className="bg-blue-50  rounded-lg flex flex-col justify-evenly shadow-lg items-center col-span-6 row-span-7 ">
         <Contact></Contact>
-        <div className="w-[100%] h-[75%]  "></div>
+        <Chat></Chat>
         <div className="w-[100%] h-[12%]   flex justify-around items-center">
           <div className="w-[5%] h-[80%]  flex justify-center items-center">
             <button class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 flex items-center">
