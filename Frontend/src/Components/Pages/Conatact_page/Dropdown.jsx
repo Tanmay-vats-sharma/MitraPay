@@ -38,7 +38,7 @@ const Dropdown = () => {
         <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10">
           <a
             href="#"
-            onClick={() => openModal({ type: "userProfile" })}
+            onClick={() => openModal({ type: "userProfile", color: "blue" })}
             className="flex px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 items-center"
           >
             <span className="inline-flex justify-center items-center h-[100%]">

@@ -19,7 +19,7 @@ export function Balance() {
 
   return (
     <>
-      <div className=" bg-white shadow-2xl rounded-lg col-span-2 row-span-8 p-4">
+      <div className=" bg-white shadow-2xl rounded-lg col-span-2 row-span-8 p-4 overflow-y-hidden">
       <div className=" h-[43%]">
         <div className=" h-[12%] w-[100%] flex justify-end items-center p-1">
           <a href="/profile" className=" w-[12%] h-[100%]">
@@ -60,7 +60,15 @@ export function Balance() {
           </div>
         </div>
         <hr className="w-[95%] border-t-1 border-gray-400 items-center mb-2" />
-        <div className=" w-[95%] h-[83%] flex flex-col justify-evenly">
+        <div className=" w-[95%] h-[255px] flex flex-col justify-evenly overflow-y-scroll hide-scrollbar">
+          <Contact></Contact>
+          <Contact></Contact>
+          <Contact></Contact>
+          <Contact></Contact>
+          <Contact></Contact>
+          <Contact></Contact>
+          <Contact></Contact>
+          <Contact></Contact>
           <Contact></Contact>
           <Contact></Contact>
           <Contact></Contact>

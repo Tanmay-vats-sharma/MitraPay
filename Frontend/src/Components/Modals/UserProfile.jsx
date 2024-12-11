@@ -18,7 +18,7 @@ export function UserProfile() {
 
   return (
     <div className="flex items-center justify-center w-full h-full">
-      <div className="bg-white border-2 border-blue-500 rounded-lg shadow-md p-6 w-[90%] max-w-[800px]">
+      <div className="bg-white rounded-lg p-6 w-[90%] max-w-[800px]">
         {/* Profile Picture */}
         <div className="flex flex-col items-center mb-6">
           <img

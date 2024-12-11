@@ -13,7 +13,7 @@ export function Transactions() {
           </div>
           <div className="w-[45%] h-[100%] flex justify-around">
             <button
-              onClick={() => openModal({ type: "addMoneyInWallet" })}
+              onClick={() => openModal({ type: "addMoneyInWallet", color: "blue" })}
               className="bg-blue-600 w-[40%] flex rounded-md  justify-center px-1 items-center hover:bg-blue-800 "
             >
               <div className="w-[20%] mb-[1px] text-white text-[25px] font-mono ">
@@ -24,7 +24,7 @@ export function Transactions() {
               </div>
             </button>
             <button
-              onClick={() => openModal({ type: "sendMoney" })}
+              onClick={() => openModal({ type: "sendMoney", color: "blue" })}
               className="bg-blue-600 w-[40%] flex rounded-md border-[1px] border-gray-400 justify-center p-1 items-center hover:bg-blue-800"
             >
               <div className="w-[20%]  text-white text-[20px] font-mono">

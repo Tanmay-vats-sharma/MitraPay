@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useStateContext } from "../../StateProvider/StateProvider";
 import { useModal } from "../../StateProvider/ModalProvider";
+import config from "../../Config/config.json";
 
 export function AddMoney() {
     const { modalContent, closeModal } = useModal();
@@ -10,14 +11,7 @@ export function AddMoney() {
     const currentGullak = modalContent?.data;
     const color = modalContent?.color;
 
-    const colorStyles = {
-        blue: { borderColor: "#93C5FD", textColor: "#3B82F6", bgColor: "#3B82F6" },
-        green: { borderColor: "#86EFAC", textColor: "#22C55E", bgColor: "#22C55E" },
-        pink: { borderColor: "#F9A8D4", textColor: "#EC4899", bgColor: "#EC4899" },
-        violet: { borderColor: "#C4B5FD", textColor: "#8B5CF6", bgColor: "#8B5CF6" },
-        rose: { borderColor: "#FECACA", textColor: "#F43F5E", bgColor: "#F43F5E" },
-        amber: { borderColor: "#FDE68A", textColor: "#F59E0B", bgColor: "#F59E0B" },
-    };
+    const colorStyles = config.gullaks.colorStyles;
 
     const selectedColor = colorStyles[color] || colorStyles.blue; // Fallback to blue if color not found
 
@@ -34,20 +28,17 @@ export function AddMoney() {
     return (
         <div
             className="flex flex-col items-center justify-center w-full h-full">
-            <div
-                style={{ borderColor: selectedColor.borderColor }}
-                className="bg-white rounded-lg p-4 w-[90%] max-w-[400px] border-2"
-            >
+            <div className="bg-white rounded-lg p-4 w-[90%] max-w-[400px]">
                 <div
                     style={{ color: selectedColor.textColor }}
-                    className="w-[100%] text-[1.5em] flex items-center justify-center text-center font-semibold px-1"
+                    className="w-[100%] text-[1.9em] flex items-center justify-center text-center font-semibold px-1 py-2"
                 >
                     <p>{currentGullak?.name}</p>
                 </div>
                 {/* Input Box */}
                 <label
                     htmlFor="amount"
-                    className="block text-lg font-semibold mb-2"
+                    className="block text-2xl font-semibold mb-2"
                     style={{ color: selectedColor.textColor }}
                 >
                     Enter Amount

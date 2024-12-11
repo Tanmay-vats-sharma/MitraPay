@@ -5,10 +5,15 @@ import { AddGullak } from "../Modals/AddGullak";
 import { AddMoneyInWallet } from "../Modals/AddMoneyInWallet";
 import { SendMoney } from "../Modals/SendMoney";
 import { UserProfile } from "../Modals/UserProfile";
+import config from "../../Config/config.json";
 
 export default function Modal() {
     const { modalContent, closeModal } = useModal();
     const modal = modalContent?.type;
+    const color = modalContent?.color;
+
+    const colorStyles = config.gullaks.colorStyles;
+    const styles = colorStyles[color] || colorStyles.blue;
 
     return (
         // <div>
@@ -19,7 +24,8 @@ export default function Modal() {
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
         >
             <div
-                className="relative bg-gray-50 min-w-[40%] w-auto min-h-[50%] h-auto rounded-lg shadow-lg p-4 flex justify-center items-center"
+                className="relative bg-white min-w-[40%] w-auto min-h-[50%] h-auto rounded-lg shadow-lg p-4 flex justify-center items-center border-[3px]"
+                style={{ borderColor: styles.borderColor }}
             >
                 {/* Close Button */}
                 <button

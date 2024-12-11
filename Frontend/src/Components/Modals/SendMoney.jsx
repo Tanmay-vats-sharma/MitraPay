@@ -62,7 +62,7 @@ export function SendMoney() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
-      <div className="bg-white border-2 border-blue-500 rounded-lg shadow-md p-4 w-[90%] max-w-[400px]">
+      <div className="bg-white rounded-lg p-4 w-[90%] max-w-[400px]">
         {/* Header */}
         <h2 className="text-xl font-bold text-gray-700 mb-4 text-center">
           Send Money

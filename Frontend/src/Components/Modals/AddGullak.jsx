@@ -33,7 +33,7 @@ export function AddGullak() {
     <div className="flex flex-col items-center justify-center w-full h-full">
       <div
         style={{ borderColor: styles.borderColor }}
-        className="bg-white rounded-lg shadow-md p-4 w-[90%] max-w-[400px] border-2"
+        className="bg-white rounded-lg p-4 w-[90%] max-w-[400px]"
       >
         {/* Gullak Name Input */}
         <label
