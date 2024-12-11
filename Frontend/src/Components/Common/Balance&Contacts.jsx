@@ -51,7 +51,7 @@ export function Balance() {
             </div>
           </div>
         </div>
-        <div className="h-[57%]  flex items-center flex-col ">
+        <div className="h-[292px]  flex items-center flex-col overflow-y-hidden">
           <div className="h-[15%] w-[100%] flex justify-envenly items-center  p-1">
             <div className="font-semibold tracking-tighter text-[18px] w-[75%] h-[100%] flex items-center">
               <p>Your Contacts</p>
@@ -61,7 +61,49 @@ export function Balance() {
             </div>
           </div>
           <hr className="w-[95%] border-t-1 border-gray-400 items-center mb-2" />
-          <div className=" w-[95%] h-[83%] flex flex-col justify-evenly">
+          <div className=" w-[95%] h-[250px] flex flex-col justify-evenly overflow-y-scroll hide-scrollbar">
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
+            <Contact></Contact>
             <Contact></Contact>
             <Contact></Contact>
             <Contact></Contact>
