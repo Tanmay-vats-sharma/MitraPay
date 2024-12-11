@@ -15,7 +15,7 @@ export function Message({ text, sender, time }) {
         <div className="mb-4">{text}</div> {/* Added spacing */}
         <span
           className={`text-xs absolute bottom-1 right-2  ${
-            sender === "them" ? "text-black" : "text-gray-300"
+            sender === "them" ? "text-black" : "text-white"
           }`}
           style={{ fontSize: "0.7rem" }}
         >
