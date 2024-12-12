@@ -30,6 +30,8 @@ const requestLogger = (req, res, next) => {
 app.use(requestLogger);
 
 const loginRoute = require("./routes/LoginRoute");
+const gullakRoute = require("./routes/gullakroutes");
+app.use("/api/gullak", gullakRoute);
 
 app.use("/api/auth", loginRoute);
 app.get("/", (req, res) => {

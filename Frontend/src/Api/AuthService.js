@@ -13,7 +13,6 @@ export const login = async ({email, password}) => {
     throw new Error(error.response?.data?.error?.message || 'Login failed');
   }
 };
-
 // Register function
 export const register = async (userData) => {
   try {
