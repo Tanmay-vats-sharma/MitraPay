@@ -13,7 +13,16 @@ const MessageSchema = new mongoose.Schema(
 
     content: { type: String, required: true },
   },
-  { timestamps: true },
+  { 
+    timestamps: true, 
+    toJSON: { 
+      transform: (doc, ret) => {
+        delete ret._id; 
+        delete ret.__v; 
+        return ret;
+      },
+    },
+  },
 );
 
 module.exports = mongoose.model("Message", MessageSchema);

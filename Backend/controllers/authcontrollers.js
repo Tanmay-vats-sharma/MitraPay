@@ -1,4 +1,5 @@
 const userModel = require("../models/user");
+const walletModel = require("../models/wallet");
 const { google } = require('googleapis');
 const mongoose = require("mongoose");
 const ApiError = require("../utils/ApiError");
@@ -17,37 +18,62 @@ const { hashPassword, comparePassword } = require("../utils/password-encoder");
 
 const register = async (req, res, next) => {
   try {
-    let { name, email, password } = req.body;
+    let {
+      name,
+      email,
+      password,
+      Address,
+      Phone_no,
+      profile_pic,
+    } = req.body;
 
-    let user = await userModel.findOne({ email: email });
+    let user = await userModel.findOne({ email });
 
     if (user) {
       return next(new ApiError(400, "User already exists"));
-    } else {
-      const hashedPassword = await hashPassword(password);
-      const newUser = await userModel.create({
-        name,
-        email,
-        password: hashedPassword,
-      });
-
-      const accessToken = generateAccessToken({ email });
-      const refreshToken = generateRefreshToken({ email });
-
-      res.cookie("refreshToken", refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-      });
-
-      res.json({ accessToken });
     }
+
+    const hashedPassword = await hashPassword(password);
+    const wallet = await walletModel.create({ balance: 0 });
+
+    const newUser = await userModel.create({
+      name,
+      email,
+      password: hashedPassword,
+      Address,
+      Phone_no,
+      profile_pic,
+      wallet: wallet._id, 
+    });
+
+    const accessToken = generateAccessToken({ email });
+    const refreshToken = generateRefreshToken({ email });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      // secure: process.env.NODE_ENV === "production",
+    });
+
+    res.status(201).json({
+      message: "User registered successfully",
+      accessToken,
+      user: {
+        name: newUser.name,
+        email: newUser.email,
+        profile_pic: newUser.profile_pic,
+        Address: newUser.Address,
+        Phone_no: newUser.Phone_no,
+      },
+    });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
-      return next(new ApiError(400, "Please Enter Correct Email", error.message));
+      return next(new ApiError(400, "Validation error", error.message));
     }
+
     next(error);
   }
-};
+}
+
 
 const login = async (req, res, next) => {
   let { email, password } = req.body;
@@ -70,6 +96,7 @@ const login = async (req, res, next) => {
         res.json(accessToken);
 
       } else {
+        console.log("Hi 1");
         next(new ApiError(400, "Please Enter Correct Password"));
       }
       ;

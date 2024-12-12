@@ -1,82 +1,137 @@
+const User = require("../models/user");
+const Gullak = require("../models/gullak");
+const ApiError = require("../utils/ApiError");
+
 const GullakController = {
-  createGullak: async (req, res) => {
-    const { userId, name, total_amt, initial_amt } = req.body;
+
+  getGullaks: async (req, res, next) => {
+    const { email } = req.user;
 
     try {
-      const user = await User.findById(userId).populate("wallet");
+      const
+        user = await User.findOne({ email }).populate({
+          path: "gullak",
+          select : "-_id -__v -user",
+        });
 
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+        return next(new ApiError(404, "User not found"));
       }
 
-      const wallet = user.wallet;
+      res.status(200).json({ gullaks: user.gullak });
+    } catch (error) {
+      next(new ApiError(500, "Internal server error"));
+    }
+  },
 
-      if (wallet.balance < initial_amt) {
-        return res
-          .status(400)
-          .json({ message: "Insufficient balance in wallet" });
+  createGullak: async (req, res, next) => {
+    const { name, total_amt } = req.body;
+    const { email } = req.user;
+
+    try {
+      const user = await User.findOne({ email }).populate("wallet");
+
+      if (!user) {
+        return next(new ApiError(404, "User not found"));
       }
 
       const gullak = new Gullak({
         name,
         total_amt,
-        current_amt: initial_amt,
+        user: user._id,
       });
 
       const savedGullak = await gullak.save();
 
-      wallet.balance -= initial_amt;
-      await wallet.save();
-
       user.gullak.push(savedGullak._id);
       await user.save();
 
+      console.log(savedGullak.toJSON());
+
       res.status(201).json({
         message: "Gullak created successfully!",
-        gullak: savedGullak,
-        wallet: wallet,
+        gullak: savedGullak.toJSON(),
       });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Internal server error" });
+      next(new ApiError(500, "Internal server error"));
     }
   },
 
-  deleteGullak: async (req, res) => {
-    const { userId, gullakId } = req.params;
+  deleteGullak: async (req, res, next) => {
+    const { gullakName } = req.params;
+    const { email } = req.user;
 
     try {
-      const user = await User.findById(userId).populate("wallet");
-
+      const user = await User.findOne({ email }).populate("wallet");
+      console.log(gullakName);
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+        return next(new ApiError(404, "User not found"));
       }
 
       const wallet = user.wallet;
-      const gullak = await Gullak.findById(gullakId);
+      const gullak = await Gullak.findOneAndDelete({ user: user._id, name: gullakName });
 
       if (!gullak) {
-        return res.status(404).json({ message: "Gullak not found" });
+        return next(new ApiError(404, "Gullak not found"));
       }
 
-      // Add the current amount from the Gullak back to the wallet
       wallet.balance += gullak.current_amt;
       await wallet.save();
 
-      // Remove the Gullak from the user's list
-      user.gullak = user.gullak.filter((id) => id.toString() !== gullakId);
-      await user.save();
+      console.log(gullak._id);
 
-      // Delete the Gullak
-      await gullak.remove();
+      user.gullak = user.gullak.filter((id) => id.toString() !== gullak._id.toString());
+      await user.save();
 
       res.status(200).json({
         message: "Gullak deleted and money returned to wallet",
         wallet: wallet,
       });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Internal server error" });
+      next(new ApiError(500, "Internal server error"));
     }
   },
+
+  addMoney: async (req, res, next) => {
+    const { gullakName, amount } = req.body;
+    const { email } = req.user;
+    
+    try {
+      const user = await User.findOne({ email }).populate("wallet");
+      if (!user) {
+        return next(new ApiError(404, "User not found"));
+      }
+
+      const wallet = user.wallet;
+      const gullak = await Gullak.findOne({ user: user._id, name: gullakName });
+
+      if (!gullak) {
+        return next(new ApiError(404, "Gullak not found"));
+      }
+
+      if (wallet.balance < amount) {
+        return next(new ApiError(400, "Insufficient balance"));
+      }
+
+      if (amount < 0) {
+        return next(new ApiError(400, "Amount should be positive"));
+      }
+
+      wallet.balance -= amount;
+      gullak.current_amt += amount;
+      await wallet.save();
+      await gullak.save();
+
+      res.status(200).json({
+        message: "Money added to gullak successfully",
+        wallet: wallet,
+        gullak: gullak,
+      });
+
+    } catch (error) {
+      return next(new ApiError(500, "Internal server error"));
+    }
+  }
 };
+
+module.exports = GullakController;

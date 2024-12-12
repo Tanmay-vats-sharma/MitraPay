@@ -45,25 +45,32 @@ let userschma = mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "contact",
-        unique: true,
       },
     ],
     gullak: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "gullak",
-        unique: true,
       },
     ],
     transactions: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "transaction",
-        unique:true,
       },
     ],
   },
-  { timestamps: true }
+  { 
+    timestamps: true,
+    toJSON: { 
+      transform: (doc, ret) => {
+        delete ret._id; 
+        delete ret.__v; 
+        delete ret.password;
+        return ret;
+      },
+    },
+  }
 );
 
 module.exports = mongoose.model("user", userschma);
