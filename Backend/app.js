@@ -31,9 +31,11 @@ app.use(requestLogger);
 
 const loginRoute = require("./routes/LoginRoute");
 const gullakRoute = require("./routes/GullakRoute");
-app.use("/api/gullak", gullakRoute);
+const transactionRoute = require("./routes/transactionRoute");
 
 app.use("/api/auth", loginRoute);
+app.use("/api", transactionRoute);
+app.use("/api/gullak", gullakRoute);
 app.get("/", (req, res) => {
     res.send(`server is running on ${PORT}`)
 })

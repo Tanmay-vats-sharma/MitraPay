@@ -35,6 +35,7 @@ let userschma = mongoose.Schema(
     Phone_no: {
       type: String,
       required: true,
+      unique: true,
     },
     wallet: {
       type: mongoose.Schema.Types.ObjectId,
