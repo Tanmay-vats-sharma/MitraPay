@@ -64,6 +64,7 @@ const register = async (req, res, next) => {
         Address: newUser.Address,
         Phone_no: newUser.Phone_no,
       },
+      satatus: "success",
     });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
@@ -93,10 +94,20 @@ const login = async (req, res, next) => {
           secure: process.env.NODE_ENV === "production",
         });
 
-        res.json(accessToken);
+        res.json({
+          message: "User logged in successfully",
+          accessToken,
+          user: {
+            name: user.name,
+            email: user.email,
+            profile_pic: user.profile_pic,
+            Address: user.Address,
+            Phone_no: user.Phone_no,
+          },
+          status: "success",
+        });
 
       } else {
-        console.log("Hi 1");
         next(new ApiError(400, "Please Enter Correct Password"));
       }
       ;
@@ -110,7 +121,10 @@ const login = async (req, res, next) => {
 
 const logout = (req, res) => {
   res.cookie("token", "");
-  res.status().json({ "message:": "user logged out" });
+  res.status().json({ 
+    "message:": "user logged out",
+    status: "success"
+  });
 }
 
 
@@ -123,7 +137,10 @@ const refreshToken = (req, res,next) => {
       if (err) return next(new ApiError(403, "Invalid token"));
 
       const accessToken = generateAccessToken({ email: user.email });
-      res.json({ accessToken });
+      res.json({ 
+        accessToken,
+        status: "success"
+      });
     });
   }
   catch (error) {
@@ -169,7 +186,11 @@ const googleLogin = async (req, res,next) => {
       secure: process.env.NODE_ENV === 'production',
     });
 
-    res.json({ accessToken, user });
+    res.json({ 
+      accessToken, 
+      user,
+      status: "success" 
+    });
   } catch (error) {
     next(error);
   }

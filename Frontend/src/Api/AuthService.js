@@ -5,7 +5,6 @@ export const login = async ({email, password}) => {
   try {
     const response = await api.post('/auth/login', { email, password });
     const { accessToken } = response.data;
-    console.log("Hit 1")
     // Store access token
     localStorage.setItem('accessToken', accessToken);
     return response.data;

@@ -63,6 +63,7 @@ const createContact = async (req, res, next) => {
     res.status(201).json({
       message: "Contact created successfully!",
       contact,
+      status: "success",
     });
 
   } catch (error) {
@@ -78,13 +79,13 @@ const getMessages = async (req, res, next) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return next(new ApiError(404, "User not found"));
     }
 
     const contact = await Contact.findById(contactId).populate("participants");
 
     if (!contact) {
-      return res.status(404).json({ message: "Contact not found" });
+      return next(new ApiError(404, "Contact not found"));
     }
 
     const isParticipant = contact.participants.some(
@@ -92,7 +93,7 @@ const getMessages = async (req, res, next) => {
     );
 
     if (!isParticipant) {
-      return res.status(403).json({ message: "Access denied" });
+      return next(new ApiError(403, "Access denied"));
     }
 
     const messages = await Message.find({
@@ -105,9 +106,9 @@ const getMessages = async (req, res, next) => {
     // Return messages with user details
     res.status(200).json({
       messages,
+      status: "success",
     });
   } catch (error) {
-    console.error("Error fetching contact messages:", error);
     next(error);
   }
 };
@@ -121,13 +122,13 @@ const sendMessage = async (req, res, next) => {
     const user = await User.findOne( email );
     console.log(user);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return next(new ApiError(404, "User not found"));
     }
 
     const contact = await Contact.findById(contactId).populate("participants");
 
     if (!contact) {
-      return res.status(404).json({ message: "Contact not found" });
+      return next(new ApiError(404, "Contact not found"));
     }
 
     const isParticipant = contact.participants.some(
@@ -135,7 +136,7 @@ const sendMessage = async (req, res, next) => {
     );
 
     if (!isParticipant) {
-      return res.status(403).json({ message: "Access denied" });
+      return next(new ApiError(403, "Access denied"));
     }
 
     const newMessage = await Message.create({
@@ -146,9 +147,8 @@ const sendMessage = async (req, res, next) => {
       content,
     });
 
-    res.status(201).json({ message: "Message sent", newMessage });
+    res.status(201).json({ message: "Message sent", newMessage, status: "success" });
   } catch (error) {
-    console.error("Error sending message:", error);
     next(error);
   }
 };

@@ -18,7 +18,10 @@ const GullakController = {
         return next(new ApiError(404, "User not found"));
       }
 
-      res.status(200).json({ gullaks: user.gullak });
+      res.status(200).json({ 
+        gullaks: user.gullak,
+        status: "success",
+      });
     } catch (error) {
       next(new ApiError(500, "Internal server error"));
     }
@@ -51,6 +54,7 @@ const GullakController = {
       res.status(201).json({
         message: "Gullak created successfully!",
         gullak: savedGullak.toJSON(),
+        status: "success",
       });
     } catch (error) {
       next(new ApiError(500, "Internal server error"));
@@ -86,6 +90,7 @@ const GullakController = {
       res.status(200).json({
         message: "Gullak deleted and money returned to wallet",
         wallet: wallet,
+        status: "success",
       });
     } catch (error) {
       next(new ApiError(500, "Internal server error"));
@@ -126,6 +131,7 @@ const GullakController = {
         message: "Money added to gullak successfully",
         wallet: wallet,
         gullak: gullak,
+        status: "success",
       });
 
     } catch (error) {

@@ -3,7 +3,6 @@ const Transaction = require("../models/transactions");
 const wallet = require("../models/wallet");
 
 const ApiError = require("../utils/ApiError");
-const { forms } = require("googleapis/build/src/apis/forms");
 
 const viewTransactions = async (req, res, next) => {
     const { email } = req.user;
@@ -21,7 +20,10 @@ const viewTransactions = async (req, res, next) => {
             return next(new ApiError(404, "User not found"));
         }
 
-        res.status(200).json({ transactions: user.transactions });
+        res.status(200).json({ 
+            transactions: user.transactions,
+            status: "success",
+        });
     }
     catch (error) {
         return next(error);
@@ -74,6 +76,7 @@ const payMoney = async (req, res, next) => {
     res.status(200).json({
         message: "Money sent successfully",
         balance: senderWallet.balance,
+        status: "success",
     });
     }
     catch (error) {
