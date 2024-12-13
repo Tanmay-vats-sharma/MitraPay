@@ -9,7 +9,13 @@ const viewTransactions = async (req, res, next) => {
     const { email } = req.user;
     
     try {
-        const user = await User.findOne({ email }).populate("transactions");
+        const user = await User.findOne({ email }).populate({
+            path : "transactions",
+            populate: [
+                {path: "from", select: "name Phone_no profile_pic"},
+                {path: "to", select: "name Phone_no profile_pic"}
+            ]
+        });
 
         if (!user) {
             return next(new ApiError(404, "User not found"));
