@@ -1,5 +1,5 @@
 import { useGoogleLogin } from '@react-oauth/google';
-import { googleAuth } from '../../../Api/AuthService';
+import { googleAuth } from '../../../Services/AuthService';
 import { useNavigate } from 'react-router-dom';
 
 function GoogleButton() {

@@ -2,12 +2,12 @@
     "gullaks": {
         "colors": ["blue", "amber", "rose", "green", "pink", "violet"],
         "colorStyles": {
-            "blue": { "borderColor": "#93C5FD", "textColor": "#3B82F6", "bgColor": "#3B82F6" },
             "green": { "borderColor": "#86EFAC", "textColor": "#22C55E", "bgColor": "#22C55E" },
             "pink": { "borderColor": "#F9A8D4", "textColor": "#EC4899", "bgColor": "#EC4899" },
             "violet": { "borderColor": "#C4B5FD", "textColor": "#8B5CF6", "bgColor": "#8B5CF6" },
             "rose": { "borderColor": "#FECACA", "textColor": "#F43F5E", "bgColor": "#F43F5E" },
-            "amber": { "borderColor": "#FDE68A", "textColor": "#F59E0B", "bgColor": "#F59E0B" }
+            "amber": { "borderColor": "#FDE68A", "textColor": "#F59E0B", "bgColor": "#F59E0B" },
+            "blue": { "borderColor": "#93C5FD", "textColor": "#3B82F6", "bgColor": "#3B82F6" }
           }
     }
 }

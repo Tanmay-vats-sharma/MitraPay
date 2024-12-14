@@ -19,7 +19,7 @@
     "googleapis": "^144.0.0",
     "jsonwebtoken": "^9.0.2",
     "mitrapay_test": "file:",
-    "mongoose": "^8.7.0"
+    "mongoose": "^8.8.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"

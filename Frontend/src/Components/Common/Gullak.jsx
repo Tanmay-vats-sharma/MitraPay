@@ -7,6 +7,7 @@ import config from "../../Config/config.json";
 
 //Blue, Green, Pink, Violet, Rose, Amber
 export function Gullak({ gullak, color }) {
+  console.log("Inside Gullak:", gullak);
   const  {openModal}  = useModal();
   const { removeGullak } = useStateContext();
   const [addMoneyHover, setAddMoneyHover] = useState(false);
@@ -28,7 +29,7 @@ export function Gullak({ gullak, color }) {
     setBreakMoneyHover(false);
   };
 
-  const percentage = Math.floor((gullak.currentAmount / gullak.totalAmount) * 100);
+  const percentage = Math.floor((gullak?.current_amt / gullak?.total_amt) * 100);
 
   // Define static color mappings
   const colorStyles = config.gullaks.colorStyles;
@@ -91,7 +92,7 @@ export function Gullak({ gullak, color }) {
           style={{ color: styles.textColor }}
           className="w-auto h-[40%] p-1 text-[1.7em] font-semibold tracking-tight"
         >
-          <p>{`₹${gullak?.currentAmount}/${gullak?.totalAmount}/-`}</p>
+          <p>{`₹${gullak?.current_amt}/${gullak?.total_amt}/-`}</p>
         </div>
         <div className="w-[95%] h-[27%] border-[1px] bg-gray-200 rounded-full">
           <div

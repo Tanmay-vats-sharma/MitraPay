@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { login } from "../../../Api/AuthService";
+import { login } from "../../../Services/AuthService";
 
 function LoginForm() {
     const navigate = useNavigate();

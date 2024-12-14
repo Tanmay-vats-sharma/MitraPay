@@ -135,6 +135,7 @@ const GullakController = {
       });
 
     } catch (error) {
+      console.log(error);
       return next(new ApiError(500, "Internal server error"));
     }
   }

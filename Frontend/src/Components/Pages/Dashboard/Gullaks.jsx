@@ -1,13 +1,13 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Gullak } from "../../Common/Gullak"
-import {Add_gullak} from "../../Common/Add-Gullak"
+import { Add_gullak } from "../../Common/Add-Gullak"
 import { useStateContext } from "../../../StateProvider/StateProvider";
 import config from "../../../Config/config.json";
 
 export function Gullaks() {
-    const { gullaks } = useStateContext();
+  const { gullaks } = useStateContext();
 
-    const colors = config.gullaks.colors;
+  const colors = config.gullaks.colors;
   return (
     <>
       <div className="bg-white  rounded-lg flex flex-col justify-evenly shadow-lg items-center col-span-6 row-span-3 ">
@@ -22,10 +22,11 @@ export function Gullaks() {
           </div>
         </div>
 
-        <div className="w-[98%] h-[80%]  flex justify-evenly px-1">
+        <div className="w-[98%] h-[80%]  flex justify-start px-1 gap-6">
           <Add_gullak></Add_gullak>
-          <Gullak gullak={gullaks[0]} color={"amber"} />
-          <Gullak gullak={gullaks[1]} color={"green"} />
+          {gullaks.slice(0, 2).map((gullak, index) => (
+            <Gullak key={index} gullak={gullak} color={index === 0 ? "amber" : "green"} />
+          ))}
         </div>
       </div>
     </>

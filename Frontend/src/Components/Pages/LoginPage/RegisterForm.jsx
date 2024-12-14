@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import RegisterFormStep1 from "./RegisterFormStep1";
 import RegisterFormStep2 from "./RegisterFormStep2";
-import { register } from "../../../Api/AuthService";
+import { register } from "../../../Services/AuthService";
 
 function RegisterForm() {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ function RegisterForm() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
-        phoneNumber: "",
+        Phone_no: "",
         password: ""
     });
 

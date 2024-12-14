@@ -9,7 +9,7 @@ router.post("/login", login);
 
 router.post("/logout",logout);
 
-router.post("/refresh-token", refreshToken);
+router.post("/refresh", refreshToken);
 
 router.post("/google",googleLogin);
 

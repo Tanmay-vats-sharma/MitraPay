@@ -17,6 +17,7 @@ export function AddMoney() {
 
     const handleAddMoney = () => {
         if (amount && !isNaN(amount)) {
+            console.log("Adding money to gullak:", currentGullak.name);
             addMoneyInGullak(currentGullak.name, amount);
             setAmount("");
             closeModal();

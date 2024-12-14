@@ -1,6 +1,7 @@
 const userModel = require("../models/user");
 const walletModel = require("../models/wallet");
 const { google } = require('googleapis');
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const ApiError = require("../utils/ApiError");
 
@@ -68,6 +69,7 @@ const register = async (req, res, next) => {
     });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
+      console.log(error);
       return next(new ApiError(400, "Validation error", error.message));
     }
 
@@ -131,10 +133,14 @@ const logout = (req, res) => {
 const refreshToken = (req, res,next) => {
   try {
     const refreshToken = req.cookies.refreshToken;
+    console.log(refreshToken);1
     if (!refreshToken) return res.sendStatus(401);
 
-    jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, user) => {
-      if (err) return next(new ApiError(403, "Invalid token"));
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+      if (err) {
+        console.log(err);
+        return next(new ApiError(403, "Invalid token"));
+      }
 
       const accessToken = generateAccessToken({ email: user.email });
       res.json({ 
@@ -144,6 +150,7 @@ const refreshToken = (req, res,next) => {
     });
   }
   catch (error) {
+    console.log(error);
     next(error);
   }
 }

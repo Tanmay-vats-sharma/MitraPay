@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { createGullak, getGullaks, deleteGullak, addMoneyApi } from '../Services/GullakServices';
 
 // Create Context
 // Context is a State Management tool in React. It is designed to share data that can be considered “global” for a tree of React components.
@@ -10,21 +11,30 @@ const StateContext = createContext();
 export const StateProvider = ({ children }) => {
     const [ totalAmount, setTotalAmount ] = useState(5000);
 
-    const [gullaks, setGullaks] = useState([
-        { name: "Bike", totalAmount: 13000, currentAmount: 5000 },
-        { name: "Trip", totalAmount: 20000, currentAmount: 7000 },
-        { name: "Gift", totalAmount: 2000, currentAmount: 1000 },
-        { name: "Savings", totalAmount: 50000, currentAmount: 30000 },
-        { name: "Party", totalAmount: 5000, currentAmount: 2000 },
-        { name: "Shopping", totalAmount: 10000, currentAmount: 5000 },
-    ]);
+    const [gullaks, setGullaks] = useState([]);
+
+    useEffect(() => {
+        const fetchGullaks = async () => {
+            try {
+                const response = await getGullaks();
+                console.log(response);
+                const gullaks = response?.gullaks;
+                setGullaks(gullaks);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+
+        fetchGullaks();
+    }, []);
 
     useEffect(() => {
         console.log("Gullaks:",gullaks);
-    },[gullaks])
+    },[gullaks]);
+        
 
     const addGullak = (name, totalAmount) => {
-        // Check if a gullak with the same name already exists
+
         console.log("hello");
         const isDuplicate = gullaks.some((gullak) => gullak.name === name);
 
@@ -33,12 +43,16 @@ export const StateProvider = ({ children }) => {
             return;
         }
 
-        // Add the new gullak if the name is unique
-        setGullaks([
-            ...gullaks,
-            { name: name, totalAmount: totalAmount, currentAmount: 0 },
-        ]);
-
+        try{
+            createGullak({name, totalAmount});
+            setGullaks([
+                ...gullaks,
+                { name: name, total_amt: totalAmount, current_amt: 0 },
+            ]);
+        } catch (error) {
+            toast.error(error.message);
+            return;
+        }
         toast.success("Gullak Added");
     };
 
@@ -48,19 +62,23 @@ export const StateProvider = ({ children }) => {
     
         toast.info("Breaking Gullak...", { autoClose: 1000 });
     
-        setTimeout(() => {
-            // Remove the Gullak
+        try{
+            deleteGullak(name);
             const newGullaks = gullaks.filter((gullak) => gullak.name !== name);
             setGullaks(newGullaks);
     
             // Update the total amount
-            IncreaseAmount(gullakToRemove.currentAmount);
+            IncreaseAmount(gullakToRemove.current_amt);
     
             toast.success("Gullak broken successfully!", { autoClose: 1500 });
-        }, 2100);
+        }
+        catch (error) {
+            toast.error(error.message);
+            return;
+        }
     };
 
-    const addMoneyInGullak = (name, amount) => {
+    const addMoneyInGullak = async (name, amount) => {
         // Find the Gullak to add money
         const gullakToAddMoney = gullaks.find((gullak) => gullak.name === name);
     
@@ -69,8 +87,8 @@ export const StateProvider = ({ children }) => {
             return;
         }
     
-        // Convert currentAmount and amount to numbers
-        const currentAmount = Number(gullakToAddMoney.currentAmount);
+        // Convert current_amt and amount to numbers
+        const current_amt = Number(gullakToAddMoney.current_amt);
         const addAmount = Number(amount);
 
         if (addAmount <= 0) {
@@ -79,18 +97,29 @@ export const StateProvider = ({ children }) => {
         }
     
         // Check if the amount exceeds the total amount
-        if (currentAmount + addAmount > gullakToAddMoney.totalAmount) {
+        if (current_amt + addAmount > gullakToAddMoney.totalAmount) {
             toast.error("Amount exceeds the total amount!");
             return;
         }
-    
+
+        try{
+            console.log("Adding Money");
+            await addMoneyApi({name, amount: addAmount});
+            console.log("Money Added");
+        } catch (error) {
+            toast.error(error.message);
+            return;
+        }
+        
+        console.log("Gullak to add money hit 0:");
         // Add the money to the Gullak
-        gullakToAddMoney.currentAmount = currentAmount + addAmount;
+        gullakToAddMoney.current_amt = current_amt + addAmount;
     
         // Update the Gullak
         const newGullaks = gullaks.map((gullak) =>
             gullak.name === name ? gullakToAddMoney : gullak
         );
+        console.log("New Gullaks Hit 1:",newGullaks);
         setGullaks(newGullaks);
     
         // Update the total amount
