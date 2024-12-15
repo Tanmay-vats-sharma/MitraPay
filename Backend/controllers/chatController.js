@@ -60,6 +60,8 @@ const createContact = async (req, res, next) => {
     await user.save();
     await friend.save();
 
+    await contact.populate('participants', 'name email Phone_no');
+
     res.status(201).json({
       message: "Contact created successfully!",
       contact,
@@ -96,16 +98,20 @@ const getMessages = async (req, res, next) => {
       return next(new ApiError(403, "Access denied"));
     }
 
-    const messages = await Message.find({
-      $or: [
-        { sender: { $in: contact.participants } },
-        { receiver: { $in: contact.participants } },
-      ],
-    }).populate("sender receiver", "name profile_pic");
+    await contact.populate({
+      path: "messages",
+      populate: [
+        {path: "sender", select: "name profile_pic Phone_no"},
+        {path: "receiver", select: "name profile_pic Phone_no"},
+      ]
+    });
+
+    const messages = contact.messages;
 
     // Return messages with user details
     res.status(200).json({
       messages,
+      contact,
       status: "success",
     });
   } catch (error) {
@@ -117,9 +123,10 @@ const sendMessage = async (req, res, next) => {
   try {
     const { contactId } = req.params;
     const { content } = req.body;
-    const email = req.user;
+    const {email} = req.user;
 
-    const user = await User.findOne( email );
+    console.log(email);
+    const user = await User.findOne({email});
     console.log(user);
     if (!user) {
       return next(new ApiError(404, "User not found"));
@@ -146,6 +153,9 @@ const sendMessage = async (req, res, next) => {
       ),
       content,
     });
+
+    contact.messages.push(newMessage._id);
+    await contact.save();
 
     res.status(201).json({ message: "Message sent", newMessage, status: "success" });
   } catch (error) {

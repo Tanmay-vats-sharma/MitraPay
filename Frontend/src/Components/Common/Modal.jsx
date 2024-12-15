@@ -5,6 +5,7 @@ import { AddGullak } from "../Modals/AddGullak";
 import { AddMoneyInWallet } from "../Modals/AddMoneyInWallet";
 import { SendMoney } from "../Modals/SendMoney";
 import { UserProfile } from "../Modals/UserProfile";
+import { AddContact } from "../Modals/AddContact";
 import config from "../../Config/config.json";
 
 export default function Modal() {
@@ -16,10 +17,6 @@ export default function Modal() {
     const styles = colorStyles[color] || colorStyles.blue;
 
     return (
-        // <div>
-        //     <p>Modal</p>
-        //     {modalContent == "addMoney" && <AddMoney/>}
-        // </div>
         <div
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
         >
@@ -42,6 +39,7 @@ export default function Modal() {
                     {modal == "addMoneyInWallet" && <AddMoneyInWallet />}
                     {modal == "sendMoney" && <SendMoney />}
                     {modal == "userProfile" && <UserProfile />}
+                    {modal == "addContact" && <AddContact />}
                 </div>
             </div>
         </div>

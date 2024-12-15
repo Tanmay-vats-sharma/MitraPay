@@ -3,9 +3,11 @@ import Profile_pic from "../../assets/Profile_pic.jpeg";
 import Icon from "./Icon";
 import { Contact } from "./Contact";
 import { useStateContext } from "../../StateProvider/StateProvider";
+import { useModal } from "../../StateProvider/ModalProvider";
 
 export function Balance() {
-  const { totalAmount, user } = useStateContext();
+  const { totalAmount, user, contacts } = useStateContext();
+  const { openModal } = useModal();
 
   const now = new Date().toLocaleString("en-US", {
     timeZone: "Asia/Kolkata",
@@ -56,58 +58,15 @@ export function Balance() {
             <div className="font-semibold tracking-tighter text-[18px] w-[75%] h-[100%] flex items-center">
               <p>Your Contacts</p>
             </div>
-            <div className="font-semibold tracking-tighter text-sm w-[25%] h-[100%] flex items-center justify-end p-1 text-blue-400 hover:cursor-pointer hover:text-blue-700">
-              <p>View All</p>
+            <div className="font-semibold tracking-tighter text-sm w-[25%] h-[100%] flex items-center justify-end p-1 text-blue-400 hover:cursor-pointer hover:text-blue-700" onClick={() => {openModal({ type: "addContact", color: "blue"})}}>
+              <p>Create</p>
             </div>
           </div>
           <hr className="w-[95%] border-t-1 border-gray-400 items-center mb-2" />
-          <div className=" w-[95%] h-[250px] flex flex-col justify-evenly overflow-y-scroll hide-scrollbar">
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
-            <Contact></Contact>
+          <div className=" w-[95%] h-[250px] flex flex-col justify-start overflow-y-scroll hide-scrollbar">
+            {contacts.map((contact,index) => (
+              <Contact key={index} contact={contact} />
+            ))}
           </div>
         </div>
       </div>

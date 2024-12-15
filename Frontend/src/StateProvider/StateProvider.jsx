@@ -2,7 +2,8 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { createGullak, getGullaks, deleteGullak, addMoneyApi } from '../Services/GullakServices';
 import { getTransactions, PayMoney } from '../Services/TransactionService';
-import { getUserDetails, getProfile } from '../Services/UserService';
+import { getProfile } from '../Services/UserService';
+import { getContacts } from '../Services/ChatService';
 
 // Create Context
 // Context is a State Management tool in React. It is designed to share data that can be considered “global” for a tree of React components.
@@ -15,6 +16,8 @@ export const StateProvider = ({ children }) => {
     const [gullaks, setGullaks] = useState([]);
     const [transactions, setTransactions] = useState([]);
     const [user, setUser] = useState({});
+    const [contacts, setContacts] = useState([]);
+    const [selectedContact, setSelectedContact] = useState(null);
 
     useEffect(() => {
         const fetchGullaks = async () => {
@@ -49,16 +52,28 @@ export const StateProvider = ({ children }) => {
             }
         };
 
+        const fetchContacts = async () => {
+            try {
+                const contacts = await getContacts();
+                setContacts(contacts);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+
         fetchGullaks();
         fetchTransactions();
         fetchUser();
+        fetchContacts();
     }, []);
 
     useEffect(() => {
         console.log("Gullaks:",gullaks);
         console.log("Transactions:",transactions);
         console.log("User:",user);
-    },[gullaks,transactions,user]);
+        console.log("Contacts:",contacts);
+        console.log("Selected Contact:",selectedContact);
+    },[gullaks,transactions,user,contacts,selectedContact]);
         
 
     const addGullak = (name, totalAmount) => {
@@ -181,9 +196,13 @@ export const StateProvider = ({ children }) => {
     const DecreaseAmount = (amount) => {
         setTotalAmount(totalAmount - amount);
     }
+
+    const addContact = (contact) => {
+        setContacts([contact,...contacts]);
+    };
       
     return (
-        <StateContext.Provider value={{ totalAmount, gullaks,transactions, user, addGullak, removeGullak, addMoneyInGullak, addMoney, sendMoney, setUser }}>
+        <StateContext.Provider value={{ totalAmount, gullaks,transactions, user, contacts, selectedContact, addGullak, removeGullak, addMoneyInGullak, addMoney, sendMoney, setUser, addContact, setSelectedContact }}>
             {children}
         </StateContext.Provider>
     );

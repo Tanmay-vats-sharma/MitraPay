@@ -7,7 +7,7 @@ const contactSchema = new mongoose.Schema({
   messages: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "message",
+      ref: "Message",
     },
   ],
   updatedAt: { type: Date, default: Date.now },
