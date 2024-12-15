@@ -27,7 +27,7 @@ export const StateProvider = ({ children }) => {
                 const gullaks = response?.gullaks;
                 setGullaks(gullaks);
             } catch (error) {
-                toast.error(error.message);
+                console.error("Error while fetching gullaks:",error);
             }
         };
 
@@ -37,7 +37,7 @@ export const StateProvider = ({ children }) => {
                 const Transactions = response?.transactions;
                 setTransactions(Transactions);
             } catch (error) {
-                toast.error(error.message);
+                console.error("Error while fetching transactions:",error);
             }
         };
 
@@ -48,7 +48,7 @@ export const StateProvider = ({ children }) => {
                 setUser(user);
                 setTotalAmount(user?.wallet?.balance);
             } catch (error) {
-                toast.error(error.message);
+                console.error("Error while fetching user:",error);
             }
         };
 
@@ -57,7 +57,7 @@ export const StateProvider = ({ children }) => {
                 const contacts = await getContacts();
                 setContacts(contacts);
             } catch (error) {
-                toast.error(error.message);
+                console.error("Error while fetching contacts:",error);
             }
         };
 
@@ -68,11 +68,11 @@ export const StateProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        console.log("Gullaks:",gullaks);
-        console.log("Transactions:",transactions);
-        console.log("User:",user);
-        console.log("Contacts:",contacts);
-        console.log("Selected Contact:",selectedContact);
+        // console.log("Gullaks:",gullaks);
+        // console.log("Transactions:",transactions);
+        // console.log("User:",user);
+        // console.log("Contacts:",contacts);
+        // console.log("Selected Contact:",selectedContact);
     },[gullaks,transactions,user,contacts,selectedContact]);
         
 
