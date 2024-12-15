@@ -56,6 +56,7 @@ export function Transactions() {
                 date={date}
                 time={time}
                 amount={transactionAmount}
+                image={user.Phone_no === from.Phone_no ? to.profile_pic : from.profile_pic}
               />
             );
           })}

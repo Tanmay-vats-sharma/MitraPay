@@ -1,7 +1,7 @@
 import React from "react";
 import Boy from "../../assets/boy.png";
 
-export function Transaction({ name, date, time, amount }) {
+export function Transaction({ name, date, time, amount, image }) {
   const amountColor = amount < 0 ? "text-[#af4848]" : "text-[#48af48]";
   const formattedAmount = `${amount < 0 ? "-" : ""} ₹${Math.abs(amount)}`;
   return (
@@ -10,7 +10,7 @@ export function Transaction({ name, date, time, amount }) {
         <div className="w-[40%] h-[95%]     px-1 flex items-center">
           <div className="w-[14%] h-[98%] flex items-center  ">
             <div className="h-[97%] w-[90%] overflow-hidden rounded-full  ">
-              <img src={Boy} alt="" />
+              <img src={image} alt="" />
             </div>
           </div>
           <div className="w-[56%] h-[98%] flex items-center text-[1rem] font-semibold tracking-wider px-2">

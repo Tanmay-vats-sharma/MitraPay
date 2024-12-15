@@ -32,7 +32,7 @@ export function Balance() {
           <div className="w-[100%] h-[45%]">
             <div className="h-[100%] w-full flex flex-col items-center justify-evenly p-1  ">
               <div className="h-[70%] w-[30%] overflow-hidden rounded-full border-2 ">
-                <img src={Profile_pic} alt="" />
+                <img src={user.profile_pic} alt="" />
               </div>
               <div className="text-xl tracking-tighter font-semibold ">
                 {user.name}

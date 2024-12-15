@@ -18,6 +18,7 @@ let userschma = mongoose.Schema(
     },
     profile_pic:{
       type: String,
+      default: "/assets/Avatar1.png",
     },
     email: {
       type: String,

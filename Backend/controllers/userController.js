@@ -50,4 +50,44 @@ const getProfile = async (req, res, next) => {
     }
 }
 
-module.exports = { getUserDetails, getProfile };
+const updateProfile = async (req, res, next) => {
+    try {
+      const { email } = req.user;
+
+      const user = await User.findOne({ email });
+      if (!user) {
+        return next(new ApiError(404, "User Not Found"));
+      }
+  
+      // Update the user's data with values from req.body
+      Object.keys(req.body).forEach(key => {
+        if (req.body[key]) {
+          user[key] = req.body[key];
+        }
+      });
+  
+      // Handle profile picture update if available in req.body or req.file
+      if (req.file) {
+        user.profile_pic = `${process.env.PUBLIC_URL}/static/${req.file.filename}`;
+      } else if (req.body.profile_pic) {
+        user.profile_pic = req.body.profile_pic;
+      }else{
+        return next(new ApiError(400, "Please provide a profile picture"));
+      }
+  
+      // Save the updated user data
+      await user.save();
+      user.populate("wallet");
+  
+      res.status(200).json({
+        message: "Profile updated successfully.",
+        user,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error." });
+    }
+  }
+    
+
+module.exports = { getUserDetails, getProfile, updateProfile };

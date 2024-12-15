@@ -33,7 +33,6 @@ export function SendMoney() {
     setIsLoading(true);
       try{
         const response = await getUserDetails(phoneNumber);
-        console.log(response);
         setIsLoading(false);
         setUserDetails(response);
         toast.success("User details fetched successfully!");

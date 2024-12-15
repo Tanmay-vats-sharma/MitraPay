@@ -23,3 +23,18 @@ export const getProfile = async () => {
   }
 };
 
+export const updateProfile = async (formData) => {
+  try {
+    const response = await api.post("/user/update", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.error?.message || "Failed to update Profile"
+    );
+  }
+};
+

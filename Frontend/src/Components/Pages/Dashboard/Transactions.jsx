@@ -19,7 +19,7 @@ export function Transactions() {
           </div>
         </div>
         <hr className="w-[95%] border-t-1 border-gray-400 items-center " />
-        <div className="w-[100%] h-[95%] flex flex-col items-center  justify-evenly px-4">
+        <div className="w-[100%] h-[95%] flex flex-col items-center  justify-start px-4 gap-[2px]">
           {transactions.slice(0, 5).map((transaction, index) => {
             const { from, to, amount, createdAt } = transaction;
 
@@ -46,6 +46,7 @@ export function Transactions() {
                 date={date}
                 time={time}
                 amount={transactionAmount}
+                image={user.Phone_no === from.Phone_no ? to.profile_pic : from.profile_pic}
               />
             );
           })}

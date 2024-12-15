@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const cookieparser = require("cookie-parser");
+const path = require("path");
 
 const cors = require('cors');
 
@@ -17,6 +18,7 @@ app.use(cors(corsOptions));
 app.use(cookieparser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/static", express.static(path.join(__dirname, "uploads")));
 
 // Define a request logger middleware
 const requestLogger = (req, res, next) => {
