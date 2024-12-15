@@ -5,7 +5,7 @@ import { Contact } from "./Contact";
 import { useStateContext } from "../../StateProvider/StateProvider";
 
 export function Balance() {
-  const { totalAmount } = useStateContext();
+  const { totalAmount, user } = useStateContext();
 
   const now = new Date().toLocaleString("en-US", {
     timeZone: "Asia/Kolkata",
@@ -35,7 +35,7 @@ export function Balance() {
                 <img src={Profile_pic} alt="" />
               </div>
               <div className="text-xl tracking-tighter font-semibold ">
-                Tanmay Sharma
+                {user.name}
               </div>
             </div>
           </div>

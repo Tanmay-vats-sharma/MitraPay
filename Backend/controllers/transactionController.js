@@ -10,6 +10,7 @@ const viewTransactions = async (req, res, next) => {
     try {
         const user = await User.findOne({ email }).populate({
             path : "transactions",
+            options: { sort: { createdAt: -1 } },
             populate: [
                 {path: "from", select: "name Phone_no profile_pic"},
                 {path: "to", select: "name Phone_no profile_pic"}
@@ -31,17 +32,20 @@ const viewTransactions = async (req, res, next) => {
 }
 
 const payMoney = async (req, res, next) => {
-  const { sender_email } = req.user;
+  const { email: sender_email } = req.user;
   const { amount, email, Phone_no } = req.body;
 
   try {
-    const sender = await User.findOne({ sender_email }).populate("wallet");
+    console.log(sender_email);
+    const sender = await User.findOne({ email: sender_email }).populate("wallet");
+    console.log("sender:",sender);
     const receiver = await User.findOne({ 
         $or: [
             { email: email }, 
             { Phone_no: Phone_no }
         ],
     }).populate("wallet");
+    console.log("Reciever: ",receiver);
 
     if (!sender || !receiver) {
         return next(new ApiError(404, "User not found"));
@@ -69,6 +73,7 @@ const payMoney = async (req, res, next) => {
     sender.transactions.push(transaction._id);
     receiver.transactions.push(transaction._id);
 
+    transaction.populate("from to");
 
     await sender.save();
     await receiver.save();
@@ -77,6 +82,7 @@ const payMoney = async (req, res, next) => {
         message: "Money sent successfully",
         balance: senderWallet.balance,
         status: "success",
+        transaction,
     });
     }
     catch (error) {

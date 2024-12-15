@@ -1,6 +1,8 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { createGullak, getGullaks, deleteGullak, addMoneyApi } from '../Services/GullakServices';
+import { getTransactions, PayMoney } from '../Services/TransactionService';
+import { getUserDetails, getProfile } from '../Services/UserService';
 
 // Create Context
 // Context is a State Management tool in React. It is designed to share data that can be considered “global” for a tree of React components.
@@ -9,9 +11,10 @@ const StateContext = createContext();
 
 // Provider Component
 export const StateProvider = ({ children }) => {
-    const [ totalAmount, setTotalAmount ] = useState(5000);
-
+    const [ totalAmount, setTotalAmount ] = useState(null);
     const [gullaks, setGullaks] = useState([]);
+    const [transactions, setTransactions] = useState([]);
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         const fetchGullaks = async () => {
@@ -25,12 +28,37 @@ export const StateProvider = ({ children }) => {
             }
         };
 
+        const fetchTransactions = async () => {
+            try {
+                const response = await getTransactions();
+                const Transactions = response?.transactions;
+                setTransactions(Transactions);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+
+        const fetchUser = async () => {
+            try {
+                const response = await getProfile();
+                const user = response?.user;
+                setUser(user);
+                setTotalAmount(user?.wallet?.balance);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+
         fetchGullaks();
+        fetchTransactions();
+        fetchUser();
     }, []);
 
     useEffect(() => {
         console.log("Gullaks:",gullaks);
-    },[gullaks]);
+        console.log("Transactions:",transactions);
+        console.log("User:",user);
+    },[gullaks,transactions,user]);
         
 
     const addGullak = (name, totalAmount) => {
@@ -128,16 +156,23 @@ export const StateProvider = ({ children }) => {
         toast.success("Money added successfully!");
     };
 
+    const sendMoney = async (userDetails, amount) => {
+        try {
+            const response = await PayMoney({ email: userDetails.email, Phone_no: userDetails?.Phone_no, amount});
+            console.log("Response:",response);
+            toast.success(`₹${amount} sent to ${userDetails?.phone}!`);
+            setTotalAmount(totalAmount - amount);
+            setTransactions([response?.transaction, ...transactions ]);
+        } catch (error) {
+            console.error("Error while paying money:",error);
+            toast.error(error.message);
+        }
+    };
+
     const addMoney = (amount) => {
         setTotalAmount(totalAmount + amount);
         toast.success(`₹${amount} added to your wallet!`);
     };
-
-    const sendMoney = (userDetails, amount) => {
-        // Simulated money transfer action
-        toast.success(`₹${amount} sent to ${userDetails?.phone}!`);
-    };
-    
 
     const IncreaseAmount = (amount) => {
         setTotalAmount(totalAmount + amount);
@@ -148,7 +183,7 @@ export const StateProvider = ({ children }) => {
     }
       
     return (
-        <StateContext.Provider value={{ totalAmount, gullaks, addGullak, removeGullak, addMoneyInGullak, addMoney, sendMoney }}>
+        <StateContext.Provider value={{ totalAmount, gullaks,transactions, user, addGullak, removeGullak, addMoneyInGullak, addMoney, sendMoney, setUser }}>
             {children}
         </StateContext.Provider>
     );

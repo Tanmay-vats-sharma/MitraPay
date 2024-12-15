@@ -68,7 +68,6 @@ let userschma = mongoose.Schema(
         delete ret._id; 
         delete ret.__v; 
         delete ret.password;
-        delete ret.wallet;
         delete ret.contacts;
         delete ret.gullak;
         delete ret.transactions;

@@ -1,8 +1,10 @@
 import React from "react";
 import Logo from "../../Assets/Logo2.png";
 import Icon from "./Icon";
+import { useStateContext } from "../../StateProvider/StateProvider";
 
 export function Header() {
+  const { user } = useStateContext();
 
   const getGreeting = () => {
     const currentHour = new Date().getHours();
@@ -29,7 +31,7 @@ export function Header() {
         <div className="h-[100%] w-[75%] flex justify-evenly items-center">
           <div className=" w-[65%] h-[85%] flex flex-col justify-center items-start  rounded-md">
             <div className="text-black h-[40%] text-[21px] font-bold   ml-2">
-              <h1>Hello! Tanmay Sharma</h1>
+              <h1>Hello! {user.name}</h1>
             </div>
             <div className="h-[40%] text-gray-600 ml-2">
               <p>{getGreeting()}</p>

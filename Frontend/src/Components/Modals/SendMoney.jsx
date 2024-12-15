@@ -3,13 +3,14 @@ import { useModal } from "../../StateProvider/ModalProvider"; // Adjust based on
 import { useStateContext } from "../../StateProvider/StateProvider";
 import { toast } from "react-toastify";
 import Profile_pic from "../../assets/Profile_pic.jpeg"
+import {getUserDetails} from "../../Services/UserService";
 
-// Dummy user data for demonstration
-const dummyUserData = {
-  "1234567890": { name: "John Doe", phone: "1234567890", profilePic: "https://via.placeholder.com/50" },
-  "9876543210": { name: "Jane Smith", phone: "9876543210", profilePic: "https://via.placeholder.com/50" },
-  "8278279790": { name: "Tanmay Sharma", phone: "8278279790", profilePic: Profile_pic },
-};
+// // Dummy user data for demonstration
+// const dummyUserData = {
+//   "1234567890": { name: "John Doe", phone: "1234567890", profilePic: "https://via.placeholder.com/50" },
+//   "9876543210": { name: "Jane Smith", phone: "9876543210", profilePic: "https://via.placeholder.com/50" },
+//   "8278279790": { name: "Tanmay Sharma", phone: "8278279790", profilePic: Profile_pic },
+// };
 
 export function SendMoney() {
   const { closeModal } = useModal();
@@ -19,27 +20,27 @@ export function SendMoney() {
   const [userDetails, setUserDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Simulated fetch user details function
-  const fetchUserDetails = (phone) => {
-    return dummyUserData[phone] || null;
-  };
+  // // Simulated fetch user details function
+  // const fetchUserDetails = (phone) => {
+  //   return dummyUserData[phone] || null;
+  // };
 
-  const handleFetchUser = () => {
+  const handleFetchUser = async () => {
     if (!phoneNumber || phoneNumber.length !== 10) {
       toast.error("Please enter a valid phone number.");
       return;
     }
     setIsLoading(true);
-    setTimeout(() => {
-      const details = fetchUserDetails(phoneNumber);
-      if (details) {
-        setUserDetails(details);
+      try{
+        const response = await getUserDetails(phoneNumber);
+        console.log(response);
+        setIsLoading(false);
+        setUserDetails(response);
         toast.success("User details fetched successfully!");
-      } else {
+      }
+      catch(error){
         toast.error("User not found!");
       }
-      setIsLoading(false);
-    }, 1000); // Simulating API call delay
   };
 
   const handleSendMoney = () => {
@@ -97,7 +98,7 @@ export function SendMoney() {
         {userDetails && (
           <div className="mt-4 p-3 border rounded-md bg-gray-100 flex items-center">
             <img
-              src={userDetails.profilePic}
+              src={userDetails.profile_pic}
               alt={`${userDetails.name}'s profile`}
               className="w-12 h-12 rounded-full mr-3"
             />
@@ -105,7 +106,7 @@ export function SendMoney() {
               <p className="text-gray-700 font-semibold">
                 {userDetails.name}
               </p>
-              <p className="text-gray-500">{userDetails.phone}</p>
+              <p className="text-gray-500">{userDetails.Phone_no}</p>
             </div>
           </div>
         )}
