@@ -3,6 +3,7 @@ import { Gullak } from "../../Common/Gullak"
 import { Add_gullak } from "../../Common/Add-Gullak"
 import { useStateContext } from "../../../StateProvider/StateProvider";
 import config from "../../../Config/config.json";
+import { Link } from "react-router-dom";
 
 export function Gullaks() {
   const { gullaks } = useStateContext();
@@ -16,9 +17,9 @@ export function Gullaks() {
             <p>Your Gullaks</p>
           </div>
           <div className="w-[auto] h-[auto] text-lg font-semibold text-blue-400 hover:cursor-pointer hover:text-blue-700 px-3">
-            <a href="/gullaks">
+            <Link to="/gullaks">
               <p>View All</p>
-            </a>
+            </Link>
           </div>
         </div>
 

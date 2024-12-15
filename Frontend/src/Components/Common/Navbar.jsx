@@ -1,6 +1,7 @@
 import React from 'react';
 import loimg from '../../Assets/loimg.png';
 import gullak from '../../Assets/Add-piggy.png';
+import { Link } from 'react-router-dom';
 
 export function Navbar() {
     return (
@@ -9,8 +10,8 @@ export function Navbar() {
         <div className="flex justify-between flex-col w-[90%] h-[100%]">
           <ul className="flex flex-col  space-y-2  h-[auto] w-[100%] ">
             <li>
-              <a
-                href="/Dashboard"
+              <Link
+                to="/Dashboard"
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
               >
                 <span className="inline-flex justify-center items-center ml-4">
@@ -32,11 +33,11 @@ export function Navbar() {
                 <span className="ml-2 text-lg tracking-wide truncate">
                   Dashboard
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
               >
                 <span className="inline-flex justify-center items-center ml-4">
@@ -58,11 +59,11 @@ export function Navbar() {
                 <span className="ml-2 text-lg tracking-wide truncate">
                   Contacts
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/transactions"
+              <Link
+                to="/transactions"
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
               >
                 <span className="inline-flex justify-center items-center ml-4">
@@ -84,11 +85,11 @@ export function Navbar() {
                 <span className="ml-2 text-lg tracking-wide truncate">
                   Transactions
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/profile"
+              <Link
+                to="/profile"
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
               >
                 <span className="inline-flex justify-center items-center ml-4">
@@ -108,11 +109,11 @@ export function Navbar() {
                   </svg>
                 </span>
                 <span className="ml-2 text-lg tracking-wide truncate">Profile</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/gullaks"
+              <Link
+                to="/gullaks"
                 className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
               >
                 <span className="inline-flex justify-center items-center ml-4">
@@ -140,7 +141,7 @@ export function Navbar() {
                 <span className="ml-2 text-lg tracking-wide truncate">
                   Gullaks
                 </span>
-              </a>
+              </Link>
             </li>
           </ul>
           <div className="w-[100%] flex flex-col justify-center ">

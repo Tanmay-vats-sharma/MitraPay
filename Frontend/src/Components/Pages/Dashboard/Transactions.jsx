@@ -1,6 +1,7 @@
 import React from "react";
 import { Transaction } from "../../Common/Transaction"
 import { useStateContext } from "../../../StateProvider/StateProvider";
+import { Link } from "react-router-dom";
 
 export function Transactions() {
   const { transactions, user } = useStateContext();
@@ -12,9 +13,9 @@ export function Transactions() {
             <p>Transaction History</p>
           </div>
           <div className="w-[10%] h-[auto] text-lg font-semibold text-blue-400 hover:cursor-pointer hover:text-blue-700">
-            <a href="/transactions">
+            <Link to="/transactions">
               <p>Veiw All</p>
-            </a>
+            </Link>
           </div>
         </div>
         <hr className="w-[95%] border-t-1 border-gray-400 items-center " />
