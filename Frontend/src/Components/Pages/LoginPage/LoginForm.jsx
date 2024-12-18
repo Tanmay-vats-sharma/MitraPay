@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { login } from "../../../Api/AuthService";
+import { login } from "../../../Services/AuthService";
 
 function LoginForm() {
     const navigate = useNavigate();
@@ -27,7 +27,7 @@ function LoginForm() {
             const response = await login(formData);
             console.log("Response:",response);
             toast.success("Logged in successfully");
-            navigate("/dashboard");
+            window.location.href = "/dashboard";
         } catch (error) {
             console.error("Error while logging in:",error);
             toast.error(error.message);

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const cookieparser = require("cookie-parser");
+const path = require("path");
 
 const cors = require('cors');
 
@@ -17,6 +18,7 @@ app.use(cors(corsOptions));
 app.use(cookieparser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/static", express.static(path.join(__dirname, "uploads")));
 
 // Define a request logger middleware
 const requestLogger = (req, res, next) => {
@@ -30,8 +32,16 @@ const requestLogger = (req, res, next) => {
 app.use(requestLogger);
 
 const loginRoute = require("./routes/LoginRoute");
+const gullakRoute = require("./routes/GullakRoute");
+const transactionRoute = require("./routes/transactionRoute");
+const chatRoute = require("./routes/ChatRouter");
+const userRoute = require("./routes/UserRouter");
 
 app.use("/api/auth", loginRoute);
+app.use("/api", transactionRoute);
+app.use("/api/user", userRoute);
+app.use("/api/gullak", gullakRoute);
+app.use("/api/chat", chatRoute);
 app.get("/", (req, res) => {
     res.send(`server is running on ${PORT}`)
 })
@@ -44,6 +54,7 @@ const errorHandler = (err, req, res, next) => {
             message: err.message || 'Internal Server Error',
             stack: process.env.NODE_ENV === 'production' ? ' ' : err.stack,
         },
+        status: "failed"
     });
 };
 

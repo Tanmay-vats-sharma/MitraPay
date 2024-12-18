@@ -5,7 +5,6 @@ export const login = async ({email, password}) => {
   try {
     const response = await api.post('/auth/login', { email, password });
     const { accessToken } = response.data;
-    console.log("Hit 1")
     // Store access token
     localStorage.setItem('accessToken', accessToken);
     return response.data;
@@ -13,11 +12,12 @@ export const login = async ({email, password}) => {
     throw new Error(error.response?.data?.error?.message || 'Login failed');
   }
 };
-
 // Register function
 export const register = async (userData) => {
   try {
     const response = await api.post('/auth/register', userData);
+    const { accessToken } = response.data;
+    localStorage.setItem('accessToken', accessToken);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.error?.message || 'Registration failed');

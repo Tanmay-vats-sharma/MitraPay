@@ -11,15 +11,14 @@ function Login() {
     },[Form])
 
     return (
-        // <!-- https://play.tailwindcss.com/MIwj5Sp9pw -->
-        <div className="py-16 min-h-screen flex bg-gray-100">
+        <div className="py-5 min-h-screen flex bg-blue-50">
             <div className="flex rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.15),_0_-10px_30px_rgba(0,0,0,0.15)] overflow-hidden mx-auto my-auto min-h-96 max-w-sm lg:max-w-7xl" >
                 <div 
                     className="hidden lg:block lg:w-1/2 bg-cover"
                     style={{ backgroundImage: "url('https://images.unsplash.com/photo-1546514714-df0ccc50d7bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=667&q=80')" }}
                 >
                 </div>
-                <div className="w-full p-8 lg:w-1/2">
+                <div className="w-full bg-white p-8 lg:w-1/2">
                     <img src={Logo} alt="" className="h-1/6 w-2/6 mx-auto"/>
                     <div className="my-5 flex items-center justify-center space-x-7">
                         <a className={`text-xl text-center ${Form === 'login'? 'text-black font-bold': 'text-gray-500' } uppercase cursor-pointer`} onClick={() => setForm("login")} >Login</a>

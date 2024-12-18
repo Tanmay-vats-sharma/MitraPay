@@ -1,5 +1,7 @@
 const userModel = require("../models/user");
+const walletModel = require("../models/wallet");
 const { google } = require('googleapis');
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const ApiError = require("../utils/ApiError");
 
@@ -17,37 +19,64 @@ const { hashPassword, comparePassword } = require("../utils/password-encoder");
 
 const register = async (req, res, next) => {
   try {
-    let { name, email, password } = req.body;
+    let {
+      name,
+      email,
+      password,
+      Address,
+      Phone_no,
+      profile_pic,
+    } = req.body;
 
-    let user = await userModel.findOne({ email: email });
+    let user = await userModel.findOne({ email });
 
     if (user) {
       return next(new ApiError(400, "User already exists"));
-    } else {
-      const hashedPassword = await hashPassword(password);
-      const newUser = await userModel.create({
-        name,
-        email,
-        password: hashedPassword,
-      });
-
-      const accessToken = generateAccessToken({ email });
-      const refreshToken = generateRefreshToken({ email });
-
-      res.cookie("refreshToken", refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-      });
-
-      res.json({ accessToken });
     }
+
+    const hashedPassword = await hashPassword(password);
+    const wallet = await walletModel.create({ balance: 0 });
+
+    const newUser = await userModel.create({
+      name,
+      email,
+      password: hashedPassword,
+      Address,
+      Phone_no,
+      profile_pic,
+      wallet: wallet._id, 
+    });
+
+    const accessToken = generateAccessToken({ email });
+    const refreshToken = generateRefreshToken({ email });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      // secure: process.env.NODE_ENV === "production",
+    });
+
+    res.status(201).json({
+      message: "User registered successfully",
+      accessToken,
+      user: {
+        name: newUser.name,
+        email: newUser.email,
+        profile_pic: newUser.profile_pic,
+        Address: newUser.Address,
+        Phone_no: newUser.Phone_no,
+      },
+      satatus: "success",
+    });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
-      return next(new ApiError(400, "Please Enter Correct Email", error.message));
+      console.log(error);
+      return next(new ApiError(400, "Validation error", error.message));
     }
+
     next(error);
   }
-};
+}
+
 
 const login = async (req, res, next) => {
   let { email, password } = req.body;
@@ -67,7 +96,18 @@ const login = async (req, res, next) => {
           secure: process.env.NODE_ENV === "production",
         });
 
-        res.json(accessToken);
+        res.json({
+          message: "User logged in successfully",
+          accessToken,
+          user: {
+            name: user.name,
+            email: user.email,
+            profile_pic: user.profile_pic,
+            Address: user.Address,
+            Phone_no: user.Phone_no,
+          },
+          status: "success",
+        });
 
       } else {
         next(new ApiError(400, "Please Enter Correct Password"));
@@ -83,23 +123,34 @@ const login = async (req, res, next) => {
 
 const logout = (req, res) => {
   res.cookie("token", "");
-  res.status().json({ "message:": "user logged out" });
+  res.status().json({ 
+    "message:": "user logged out",
+    status: "success"
+  });
 }
 
 
 const refreshToken = (req, res,next) => {
   try {
     const refreshToken = req.cookies.refreshToken;
+    console.log(refreshToken);1
     if (!refreshToken) return res.sendStatus(401);
 
-    jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, user) => {
-      if (err) return next(new ApiError(403, "Invalid token"));
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+      if (err) {
+        console.log(err);
+        return next(new ApiError(403, "Invalid token"));
+      }
 
       const accessToken = generateAccessToken({ email: user.email });
-      res.json({ accessToken });
+      res.json({ 
+        accessToken,
+        status: "success"
+      });
     });
   }
   catch (error) {
+    console.log(error);
     next(error);
   }
 }
@@ -142,7 +193,11 @@ const googleLogin = async (req, res,next) => {
       secure: process.env.NODE_ENV === 'production',
     });
 
-    res.json({ accessToken, user });
+    res.json({ 
+      accessToken, 
+      user,
+      status: "success" 
+    });
   } catch (error) {
     next(error);
   }
