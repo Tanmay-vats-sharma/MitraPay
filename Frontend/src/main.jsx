@@ -25,48 +25,38 @@ function App() {
           <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
             <Router>
               <Routes>
-                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/" element={<Navigate to="/dashboard" />} />
                 <Route path="/login" element={<Login />} />
                 
                 {/* Protected routes wrapped with PrivateRoute */}
                 <Route 
                   path="/dashboard" 
                   element={
-                    <PrivateRoute>
-                      <Dashboard />
-                    </PrivateRoute>
+                    <PrivateRoute element={<Dashboard/>} />
                   } 
                 />
                 <Route 
                   path="/transactions" 
                   element={
-                    <PrivateRoute>
-                      <Transaction />
-                    </PrivateRoute>
+                    <PrivateRoute element={<Transaction />} />
                   } 
                 />
                 <Route 
                   path="/profile" 
                   element={
-                    <PrivateRoute>
-                      <Profile_page />
-                    </PrivateRoute>
+                    <PrivateRoute element={<Profile_page />} />
                   } 
                 />
                 <Route 
                   path="/gullaks" 
                   element={
-                    <PrivateRoute>
-                      <Gullak />
-                    </PrivateRoute>
+                    <PrivateRoute element={<Gullak />} />
                   } 
                 />
                 <Route 
                   path="/contact" 
                   element={
-                    <PrivateRoute>
-                      <Contact />
-                    </PrivateRoute>
+                    <PrivateRoute element={<Contact />} />
                   } 
                 />
                 <Route path="*" element={<NotFound />} />

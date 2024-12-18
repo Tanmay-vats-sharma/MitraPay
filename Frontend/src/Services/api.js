@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an axios instance
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api/', 
+  baseURL: 'https://backend.namanworks.tech/api/', 
   headers: {
     'Content-Type': 'application/json',
   },
@@ -12,7 +12,7 @@ const api = axios.create({
 // Function to refresh the access token
 const refreshAccessToken = async () => {
   try {
-    const response = await axios.post('http://localhost:8080/api/auth/refresh', {}, {
+    const response = await axios.post('https://backend.namanworks.tech/api/auth/refresh', {}, {
       headers: {
         'Content-Type': 'application/json',
       },

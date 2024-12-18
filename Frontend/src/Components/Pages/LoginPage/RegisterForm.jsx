@@ -35,7 +35,7 @@ function RegisterForm() {
         try {
             const response = await register(formData);
             toast.success("Registered successfully");
-            navigate("/dashboard");
+            window.location.href = "/dashboard";
         } catch (error) {
             console.error("Error while registering:",error);
             toast.error(error.message);

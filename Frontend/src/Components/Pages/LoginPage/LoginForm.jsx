@@ -27,7 +27,7 @@ function LoginForm() {
             const response = await login(formData);
             console.log("Response:",response);
             toast.success("Logged in successfully");
-            navigate("/dashboard");
+            window.location.href = "/dashboard";
         } catch (error) {
             console.error("Error while logging in:",error);
             toast.error(error.message);
