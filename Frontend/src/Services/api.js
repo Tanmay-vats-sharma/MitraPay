@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an axios instance
 const api = axios.create({
-  baseURL: 'https://backend.namanworks.tech/api/', 
+  baseURL: `${import.meta.env.VITE_BACKEND_DOMAIN}/api/`, 
   headers: {
     'Content-Type': 'application/json',
   },
@@ -12,11 +12,11 @@ const api = axios.create({
 // Function to refresh the access token
 const refreshAccessToken = async () => {
   try {
-    const response = await axios.post('https://backend.namanworks.tech/api/auth/refresh', {}, {
+    const response = await axios.post(`${import.meta.env.VITE_BACKEND_DOMAIN}/api/auth/refresh`, {}, {
       headers: {
         'Content-Type': 'application/json',
       },
-      withCredentials: true, // Include cookies if necessary
+      withCredentials: true,
     });
     const { accessToken } = response.data;
 
