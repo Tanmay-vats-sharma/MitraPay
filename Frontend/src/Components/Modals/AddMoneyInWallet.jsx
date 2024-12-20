@@ -1,24 +1,61 @@
 import React, { useState } from "react";
-import { useModal } from "../../StateProvider/ModalProvider"; 
+import { useModal } from "../../StateProvider/ModalProvider";
 import { useStateContext } from "../../StateProvider/StateProvider";
 import { toast } from "react-toastify";
+import { addMoneyApi } from "../../Services/TransactionService";
 
 export function AddMoneyInWallet() {
+  const key = import.meta.env.VITE_RAZORPAY_KEY_ID;
   const { closeModal } = useModal();
-  const { addMoney } = useStateContext();
+  const { addMoney, user } = useStateContext();
 
   const [amount, setAmount] = useState("");
 
-  const handleAddMoney = () => {
+  const handleAddMoney = async () => {
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
       toast.error("Please enter a valid amount.");
       return;
     }
 
-    // Trigger the function passed from parent to update the wallet balance
-    addMoney(Number(amount));
-    setAmount("");
-    closeModal();
+    toast.info("Processing Payment, Please Wait...");
+    try {
+      const response = await addMoneyApi({ amount });
+      const { orderId, amount: payableAmount} = response;
+
+      if (!orderId) {
+        alert('Failed to create order');
+        return;
+      }
+
+      // Configure Razorpay checkout options
+      const options = {
+        key,
+        amount: payableAmount, // Amount in paise
+        description: 'Add Money to Wallet',
+        order_id: orderId, // Razorpay Order ID
+        handler: function (response) {
+          addMoney(Number(amount));
+          setAmount("");
+          closeModal();
+        },
+        prefill: {
+          name: user?.name,
+          email: user?.email,
+          contact: user?.Phone_no,
+        },
+        theme: {
+          color: '#F37254', // Razorpay theme color
+        },
+      };
+
+      // Open Razorpay checkout
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    }
+    catch (error) {
+      toast.error(error.message);
+    }
+
   };
 
   return (

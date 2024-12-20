@@ -25,3 +25,14 @@ export const PayMoney = async ({email,Phone_no, amount}) => {
     );
   }
 };
+
+export const addMoneyApi = async ({ amount }) => {
+  try {
+    const response = await api.post(`/add-money`,{amount});
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.error?.message || "Failed to add Money"
+    );
+  }
+};

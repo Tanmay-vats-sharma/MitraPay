@@ -47,6 +47,7 @@ export const StateProvider = ({ children }) => {
                 const user = response?.user;
                 setUser(user);
                 setTotalAmount(user?.wallet?.balance);
+                console.log("User:",user);
             } catch (error) {
                 console.error("Error while fetching user:",error);
             }
